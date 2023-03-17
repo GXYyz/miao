@@ -8,9 +8,10 @@
 </head>
 <body>
   <h1>404 NOT FOUND</h1>
-  <div></div>
+  <div id="time"></div>
   <script>
-      var div = document.querySelector('div');
+      const time = document.getElementById('time')
+      
       getTimer()
       setInterval(getTimer, 1000);
 
@@ -27,7 +28,7 @@
           m = m < 10 ? '0' + m : m;
           var s = time.getSeconds();
           s = s < 10 ? '0' + s : s;
-          div.innerHTML = year + '年' + month + '月' + dates + '日' + arr[day] + h + ':' + m + ':' + s;
+          time.innerHTML = year + '年' + month + '月' + dates + '日' + arr[day] + h + ':' + m + ':' + s;
       }
   </script>
 </body>
