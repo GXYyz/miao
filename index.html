@@ -8,9 +8,9 @@
 </head>
 <body>
   <h1>404 NOT FOUND</h1>
-  <div id="time"></div>
+  <div id="clock"></div>
   <script>
-      const time = document.getElementById('time')
+      const clock = document.getElementById('clock')
       
       getTimer()
       setInterval(getTimer, 1000);
@@ -28,7 +28,7 @@
           m = m < 10 ? '0' + m : m;
           var s = time.getSeconds();
           s = s < 10 ? '0' + s : s;
-          time.innerHTML = year + '年' + month + '月' + dates + '日' + arr[day] + h + ':' + m + ':' + s;
+          clock.innerHTML = year + '年' + month + '月' + dates + '日' + arr[day] + h + ':' + m + ':' + s;
       }
   </script>
 </body>
