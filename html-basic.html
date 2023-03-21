@@ -20,7 +20,7 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, quasi?</p>
   <a href="http://www.jd.com" target="_blank">在新窗口打开京东</a>
   <a href="mailto:xxxx@xxx.com">点我发邮件</a>
-  <a href="#footer">跳到页面底部</a>
+  <a href="#bottmo">跳到页面底部</a>
   <a href="#" download>点我下载文件</a>
   <img src="./lib/stock-photo-229389427.jpg" alt="我没加载出来" width="200">
   <hr>
@@ -56,7 +56,141 @@
     <li>中学</li>
     <li>大学</li>
   </ul>
-  <footer id="footer"></footer>
-  
+  <hr>
+
+  <dl>
+    <dt>班级
+      <dd>三年二班</dd>
+    </dt>
+    
+    <dt>老师
+      <dd>张</dd>
+      <dd>李</dd>
+      <dd>王</dd>
+    </dt>
+    <dt>学生
+      <dd>小明</dd>
+      <dd>豆豆</dd>
+    </dt>
+  </dl>
+  <hr>
+  <h1>
+    Bing搜索
+  </h1>
+<form action="https://cn.bing.com/search?" target="_blank">
+  <input type="text" name="q">
+  <button>在新窗口打开搜索结果</button>
+</form>
+  <hr>
+<form action>
+  <p>个人信息调查表</p>
+  <br>
+  <dl>
+    <dt>性别
+      <dd>
+        <label>
+          <input type="radio" name="gender">男
+        </label>
+        <label>
+          <input type="radio" name="gender">女
+        </label>
+      </dd>
+    </dt>
+    <dt>年龄
+      <dd>
+        <select>
+          <option hidden>请选择</option>
+          <optgroup label="幼年">
+            <option>1-6岁</option>
+          </optgroup> 
+          <optgroup label="少年">
+            <option>6-12岁</option>
+            <option>12-18岁</option>
+          </optgroup> 
+          <optgroup label="青年">
+            <option>18-24岁</option>
+            <option>24-40岁</option>
+          </optgroup>
+        </select>
+      </dd>
+    </dt>
+    <dt>生日
+      <dd><input type="date"></dd>
+    </dt>
+    <dt>生辰
+      <dd><input type="time"></dd>
+    </dt>
+    <dt>照片
+      <dd>
+        <input type="file" id="update" hidden>
+        <label for="update">点我上传照片，我比文件上传按钮好看</label>
+      </dd>
+    </dt>
+    <dt>自我介绍
+      <dd><textarea name="自我介绍" placeholder="我来自M78星云,我是妈妈生的" cols="30" rows="10"></textarea></dd>
+    </dt>
+  </dl>
+  <br>
+  <fieldset disabled>
+    <legend>这里全部禁用了</legend>
+    <input type="text"><input type="text"><input type="text"><input type="text">
+  </fieldset>
+  <button>提交</button><button type="reset">重置</button>
+</form>
+<hr>
+<table border="1">
+    <colgroup>
+      <col>
+      <col bgcolor="red">
+    </colgroup>
+  <thead>
+    <th>编号</th>
+    <th>品名</th>
+    <th>进价</th>
+    <th>出价</th>
+  </thead>
+  <tbody>
+    <tr>
+      <th>aaa</th>
+      <td>a</td>
+      <td rowspan="2">a</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>a</td>
+      <td>a</td>
+      <td>a</td>
+    </tr><tr>
+      <th>a</th>
+      <td>a</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<img src="./lib/coffee.jpg" width="200" usemap="#coffee">
+<map name="coffee" id="coffee">
+  <area shape="circle" coords="90,150,80" href="https://baike.baidu.com/item/%E5%92%96%E5%95%A1/29518" target="_blank">
+</map>
+<hr>
+<a target="iframe" href="https://github.com/">GitHub</a>
+<br>
+<iframe name="iframe" src="https://vant-ui.github.io/vant-weapp/#/home" frameborder="1">
+  your browser don't support iframe
+</iframe>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<span id="bottom">到达世界最底层</span>
 </body>
 </html>
