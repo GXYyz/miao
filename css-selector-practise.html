@@ -93,30 +93,35 @@
         color: black;
       }
      
-      .prime li:nth-child(even){
+      .prime li:nth-child(even),
+      .prime li:nth-child(3n),
+      .prime li:nth-child(5n),
+      .prime li:nth-child(7n)
+      {
         color: green;
       }
-      .prime li:nth-child(3n){
+      
+      .prime li:nth-child(2),
+      .prime li:nth-child(3),
+      .prime li:nth-child(5),
+      .prime li:nth-child(7)
+      {
+        color: red;
+      }
+    /* 
+    优化
+      .prime li {
+        color: red;
+      }
+
+      .prime li:first-child,
+      li:nth-child(2n + 4),
+      li:nth-child(3n + 6),
+      li:nth-child(5n + 10),
+      li:nth-child(7n + 14) {
         color: green;
       }
-      .prime li:nth-child(5n){
-        color: green;
-      }
-      .prime li:nth-child(7n){
-        color: green;
-      } 
-      .prime li:nth-child(2){
-        color: red;
-      }
-      .prime li:nth-child(3){
-        color: red;
-      }
-      .prime li:nth-child(5){
-        color: red;
-      }
-      .prime li:nth-child(7){
-        color: red;
-      }
+    */
       
     </style>
   </head>
