@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 初始化格式 */
+    body{
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+    ul{
+      padding: 0;
+      margin: 0;
+    }
+    li{
+      list-style: none;
+    }
+    /* 头部区域 */
+    .header{
+      background-color: #000;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .header p{
+      width: 600px;
+      margin: 0 auto;
+    }
+    /* 主内容区 */
+    .body > *{
+      width: 600px;
+      margin: 10px auto;
+    }
+    /* 产品列表 */
+    .good li{
+      width: 174px;
+      height: 34px;
+      background-color: pink;
+      border: 3px solid black;
+      margin: 15px 0;
+      text-align: center;
+      line-height: 34px;
+    }
+    .good li:hover{
+      background-color: red;
+    }
+    .good li:nth-child(n+5){
+      margin-left: 210px;
+    }
+    .good li:nth-child(n+9){
+      margin-left: 420px;
+    }
+    .good li:nth-child(4n+5){
+      margin-top: -215px;
+    }
+    /* 更多 */
+    .more{
+      overflow: hidden;
+    }
+    .more li{
+      border-bottom: 1px dashed black;
+    }
+    .more ul{
+      margin-bottom: -1px;
+    }
+  
+    /* 底部 */
+    .footer{
+      background-color: rgb(238, 138, 238);
+    }
+    .footer p{
+      margin: 0;
+      text-align: center;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <p>hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果hello world 请调整浏览器窗口大小查看效果</p>
+  </div>
+  <div class="body">
+    <div class="banner">
+      页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px  页面主体 宽度600px 
+    </div>
+    <div class="good">
+      <ul>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+        <li>产品</li>
+      </ul>
+    </div>
+    <div class="more">
+      <ul>
+        <li>link</li>
+        <li>link</li>
+        <li>link</li>
+        <li>link</li>
+        <li>link</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">
+    <p>©版权所有</p>
+    <p>本页面布局均使用块元素</p>
+  </div>
+</body>
+</html>
