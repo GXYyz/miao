@@ -7,6 +7,10 @@
   <title>Document</title>
   <style>
     /* 格式化 */
+    body{
+      margin: 0;
+      padding: 0;
+    }
     ul{
       padding: 0;
       margin: 0;
@@ -35,8 +39,11 @@
       background-color: yellow;
     }
     h1{
+      height: 25px;
+     
       font-size: 20px;
       padding: 10px;
+      margin: 13px 0;
     }
     /* 搜索框和link */
     .OALD .search{
@@ -49,20 +56,22 @@
       max-height: 20px;
     }
     .OALD .search button{
-      width: 42px;
+      width: 45px;
       height: 24px;
     }
     .OALD .item{
       padding: 0 30px;
-      height: 100vh;
+      height: calc(100vh - 107px);
+      box-sizing: border-box;
       overflow-y: auto;
     }
     /* 内容 */
     .fantasy .content{
-      height: 100vh;
-      margin-top: 10px;
+      height: calc(100vh - 73px);
+      /* margin-top: 10px; */
       padding: 10px;
       border-top:1px solid black ;
+      box-sizing: border-box;
       overflow-y: auto;
     }
     .fantasy .content ul > li:first-child{
