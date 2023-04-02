@@ -70,7 +70,7 @@
     #main .secondMenu  li:hover > *{
       display: block;
     }
-    /* 二级菜单箭头 */
+    /* 二级菜单箭头 靠右*/
     li.more::after{
       content: '';
       width: 13px;
@@ -79,18 +79,16 @@
       border-left: none;
       border-bottom: none;
       transform: rotate(45deg);
-      display: inline-block;
       box-sizing: border-box;
-      vertical-align: middle;
-      position: relative;
-      left: 80px;
+      position: absolute;
+      right: 40px;
+      top: 40px;
     }
 
 
     /* 三级菜单 */
-    #main .secondMenu .thirdMenu{
+    #main .more .thirdMenu{
       max-width: 300px;
-      padding: 20px;
       background-color: rgb(50, 50, 51);
       border: 1px solid rgb(125, 125, 125);
       position: absolute;
@@ -100,7 +98,7 @@
     }
 
      /* 二级菜单 右*/
-     /* #main .secondMenu-right{
+     #main .secondMenu-right{
       width: 300px;
       background-color: rgb(50, 50, 51);
       border: 1px solid rgb(125, 125, 125);
@@ -108,16 +106,18 @@
       top: 50px;
       right: 0;
       display: none;
-    } */
-    /* #main .secondMenu-right  li{
+    }
+    #main .secondMenu-right  li{
       color: rgb(125, 125, 125);
       padding: 20px;
       text-align: right;
       position: relative;
-      
-    } */
-    /* 二级菜单箭头 右*/
-    /* li.more-right::before{
+    }
+    #main .secondMenu-right  li:hover > *{
+      display: block;
+    }
+    /* 二级菜单箭头 靠左*/
+    li.more-right::before{
       content: '';
       width: 13px;
       height: 13px;
@@ -125,25 +125,28 @@
       border-right: none;
       border-top: none;
       transform: rotate(45deg);
-      display: inline-block;
       box-sizing: border-box;
-      vertical-align: middle;
-      position: relative;
-      right: 80px;
-    } */
+      position: absolute;
+      left: 40px;
+      top: 40px;
+    }
 
 
     /* 三级菜单 右*/
-    /* #main .secondMenu-right .thirdMenu-right{
+    #main .more-right .thirdMenu-right{
       max-width: 300px;
-      padding: 20px;
       background-color: rgb(50, 50, 51);
       border: 1px solid rgb(125, 125, 125);
+      text-align: left;
       position: absolute;
       top: 0;
       right: 300px;
       display: none;
-    } */
+    }
+    #main .more-right .thirdMenu-right li{
+      white-space: nowrap;
+      text-align: left;
+    }
     
   </style>
 </head>
@@ -151,12 +154,13 @@
   <menu>
     <ul id="main">
       <li>文件
-        <div class="secondMenu ">
+        <div class="secondMenu">
           <ul>
             <li>新建文本文件</li>
             <li>新建文件</li>
             <li>新建窗口</li>
-            <li class="more">打开最近的文件
+            <li class="more">
+              <span>打开最近的文件</span>
               <div class="thirdMenu">
                 <ul>
                   <li>aaa</li>
@@ -192,12 +196,12 @@
         </div>
       </li>
       <li>查看
-        <div class="secondMenu">
+        <div class="secondMenu-right">
           <ul>
             <li>命令面板</li>
             <li>打开视图</li>
-            <li class="more">外观
-              <div class="thirdMenu">
+            <li class="more-right">外观
+              <div class="thirdMenu-right">
                 <ul>
                   <li>全屏</li>
                   <li>禅模式</li>
@@ -205,8 +209,8 @@
                 </ul>
               </div>
             </li>
-            <li class="more">编辑器布局
-              <div class="thirdMenu">
+            <li class="more-right">编辑器布局
+              <div class="thirdMenu-right">
                 <ul>
                   <li>向上拆分</li>
                   <li>向下拆分</li>
