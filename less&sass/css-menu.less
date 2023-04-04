@@ -1,0 +1,137 @@
+
+ /* 格式化 */
+html,body,ul,li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* 菜单 */
+#main{
+  width: 100%;
+  height: 50px;
+  font-size: 0;
+  padding: 0;
+  // 一级菜单
+  & > li{
+    width: 25%;
+    height: 50px;
+    background-color: rgb(50, 50, 51);
+    font-size: 20px;
+    text-align: center;
+    color: rgb(125, 125, 125);
+    line-height: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    // 主菜单分隔线
+    &:nth-child(-n+3)::after{
+      content: '';
+      height: 40px;
+      border: .5px solid rgb(125, 125, 125);
+      display: inline-block;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  li:hover{
+    background-color: rgb(69,70,70);
+    & > div{
+      display: block;
+    }
+  }
+  // 二级菜单
+  .secondMenu{
+    width: 300px;
+    background-color: rgb(50, 50, 51);
+    border: 1px solid rgb(125, 125, 125);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    display: none;
+    li{
+      color: rgb(125, 125, 125);
+      padding: 20px;
+      text-align: justify;
+      position: relative;
+    }
+  }
+  // 三级菜单
+  .thirdMenu{
+    max-width: 300px;
+    background-color: rgb(50, 50, 51);
+    border: 1px solid rgb(125, 125, 125);
+    position: absolute;
+    top: 0;
+    left:300px;
+    display: none;
+  }
+  // 二级菜单 右
+  .secondMenu-right{
+    width: 300px;
+    background-color: rgb(50, 50, 51);
+    border: 1px solid rgb(125, 125, 125);
+    position: absolute;
+    top: 50px;
+    right: 0;
+    display: none;
+    li{
+      color: rgb(125, 125, 125);
+      padding: 20px;
+      text-align: right;
+      position: relative;
+    }
+  }
+/* 三级菜单 右*/
+  .thirdMenu-right{
+    max-width: 300px;
+    background-color: rgb(50, 50, 51);
+    border: 1px solid rgb(125, 125, 125);
+    text-align: left;
+    position: absolute;
+    top: 0;
+    right: 300px;
+    display: none;
+    li{
+      white-space: nowrap;
+      text-align: left;
+    }
+  }
+}
+
+
+/* 二级菜单箭头 靠右*/
+li.more::after{
+  content: '';
+  width: 13px;
+  height: 13px;
+  border: 3px solid rgb(125, 125, 125);
+  border-left: none;
+  border-bottom: none;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+  position: absolute;
+  right: 40px;
+  top: 40px;
+}
+
+
+/* 二级菜单箭头 靠左*/
+li.more-right::before{
+  content: '';
+  width: 13px;
+  height: 13px;
+  border: 3px solid rgb(125, 125, 125);
+  border-right: none;
+  border-top: none;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+  position: absolute;
+  left: 40px;
+  top: 40px;
+}
+
+
+
