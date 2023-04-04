@@ -11,7 +11,6 @@
       height: 156px;
       background-color: #30f34d;
       border: 3px solid #cbc7ca;
-      /* background-color: #30f34d; */
       border-radius: 78px;
       margin: 100px auto;
       padding: 7px;
@@ -19,7 +18,7 @@
       position: relative;
       transition: 1s;
     }
-    .cover{
+    .iso-checkbox .cover{
       width: 265px;
       height: 151px;
       border-radius: 78px;
@@ -31,7 +30,7 @@
       transition: 1s;
       transition-timing-function: cubic-bezier(.87,0,.5,.99);
     }
-    .button{
+    .iso-checkbox .button{
       width: 136px;
       height: 136px;
       border-radius: 68px;
@@ -45,7 +44,6 @@
       transition-timing-function: cubic-bezier(.77,0,.24,.99);
     }
     .iso-checkbox:hover{
-      
       border-color: #30f34d;
     }
     .iso-checkbox:hover .cover{
@@ -54,13 +52,66 @@
     .iso-checkbox:hover .button{
       left: 119px;
       box-shadow: 1px 1px 7px #9b9a9a,1px 1px 7px #9b9a9a,1px 1px 7px #9b9a9a;
+      /* animation: btnMove 1s alternate forwards;
+      animation-timing-function: cubic-bezier(.77,0,.24,.99); */
+    }
+    /* @keyframes btnMove{
+      50%{
+        width: 150px;
+        left: 57px;
+      }
+      100%{
+        width: 136px;
+        left: 119px;
+        box-shadow: 1px 1px 7px #9b9a9a,1px 1px 7px #9b9a9a,1px 1px 7px #9b9a9a;
+      }
+    } */
+  
+    /* 2.0 */
+    label.iso-checkbox2{
+      display: block;
+      width: 270px;
+      height: 156px;
+      border: 3px solid #cbc7ca;
+      border-radius: 78px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      transition: .6s cubic-bezier(.87,0,.5,.99);
+    }
+    label.iso-checkbox2 .button{
+      display: block;
+      width: auto;
+      height: 136px;
+      border-radius: 68px;
+      background-color: #fff;
+      box-shadow: 0 3px 7px #dbdbdb,0 3px 7px #dbdbdb,0 3px 7px #dbdbdb;
+      box-sizing: border-box;
+      margin-top: 7px;
+      margin-left: 7px;
+      margin-right: 119px;
+      transition: margin-left .6s cubic-bezier(.77,0,.24,.99) , margin-right .6s cubic-bezier(.77,0,.24,.99) .1s;
+    }
+    input:checked + label{
+      border-color: #30f34d;
+      box-shadow: inset 20px 0 0 78px #30f34d ;
+    }
+    input:checked + label .button{
+      margin-left: 119px;
+      margin-right: 7px; 
+      transition: margin-left .6s cubic-bezier(.77,0,.24,.99) .1s, margin-right .6s cubic-bezier(.77,0,.24,.99) ;
     }
   </style>
 </head>
 <body>
+  <h1 style="text-align: center;">1.0</h1>
   <div class="iso-checkbox">
     <div class="cover"></div>
     <div class="button"></div>
   </div>
+  <h1 style="text-align: center;">2.0</h1>
+  <input type="checkbox" id="isoCheck" hidden>
+  <label class="iso-checkbox2" for="isoCheck">
+    <div class="button"></div>
+  </label>
 </body>
 </html>
