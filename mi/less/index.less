@@ -1,0 +1,111 @@
+@minWidth:1380px;
+@IB:inline-block;
+
+.header{
+  width: 100%;
+  .headerTop{
+    width: 100%;
+    min-width: @minWidth;
+    height: 45px;
+    font-size: 13px;
+    line-height: 45px;
+    background-color: #333;
+    color: #b0b0b0;
+    white-space: nowrap;
+    li{
+      display: @IB;
+      padding: 0 11px 0 7px;
+      position: relative;
+      a{
+        color: #b0b0b0;
+      }
+      &::after{
+        content: '';
+        height: 13px;
+        border-left: 1px solid #3a3e42;
+        border-right: 1px solid #3b3733;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+      }
+      &:first-child{
+        padding-left: 0;
+        
+      }
+      &:last-child{
+        padding-right: 0;
+        &::after{
+          content: none;
+        }
+      }
+      &:hover a{
+        color: #fff;
+      }
+    }
+    .navAbout{
+      position: absolute;
+      left: 0;
+    }
+    .navServer{
+      position: absolute;
+      right: 163px;
+    }
+    .shopCar{
+      width: 133px;
+      height: 45px;
+      background-color: #424242;
+      padding-left: 15px;
+      position: absolute;
+      right: 0;
+      cursor: pointer;
+      #goodsMessage{
+        width: 355px;
+        height: 115px;
+        background-color: #fff;
+        box-shadow:0 1px 3px #b0b0b0;
+        position: absolute;
+        top: 45px;
+        right: 0;
+        display: none;
+      }
+      &:hover{
+        color: rgb(255,103,0);
+        background-color: #fff;
+        #goodsMessage{
+          display: block;
+          z-index: 9;
+        }
+      }
+    }
+    
+  }
+  .headerBottom{
+    height: 112px;
+    width: 100%;
+    min-width: @minWidth;
+    background-color: #fff;
+    font-size: 19px;
+    line-height: 112px;
+    white-space: nowrap;
+    .headerLoge{
+      height: 100%;
+      width: 63px;
+      position: relative;
+      .logo{
+        width: 63px;
+        height: 63px;
+        display: block;
+        margin: auto;
+        background-image:url(../lib/img/logo-mi2.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+}
