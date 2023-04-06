@@ -1,0 +1,39 @@
+/* 格式化 */
+html,body{
+  height: 100%;
+}
+body,p{
+  margin: 0;
+  padding: 0;
+}
+
+/* 头部 */
+div.top{
+  height: 100px;
+  background-color: cadetblue;
+  font-size: 0;
+}
+/* 主内容区 */
+div.main{
+  height: calc(100% - 100px);
+  font-size: 0;
+  & > div{
+    height: 100%;
+    font-size: 16px;
+    overflow: auto;
+  }
+  /* 边栏 */
+  .aside{
+    width: 200px;
+    background-color: sienna;
+    float: left;
+  }
+  .content{
+    background-color: teal;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+}
+
+
+
