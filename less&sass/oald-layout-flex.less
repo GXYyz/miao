@@ -1,0 +1,82 @@
+ /* 格式化 */
+html,body{
+  height: 100%;
+}
+input,button,html,body,ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+.app{
+  white-space: nowrap;
+  height: 100%;
+  width: 100%;
+  min-width: 800px;
+  display: flex;
+  
+  & > div{
+    height: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 16px;
+    width: 200px;
+  }
+  .message{
+    background-color: pink;
+    display: flow-root;
+    h1{
+      font-size: 20px;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      margin: 0;
+      padding: 10px;
+    }
+  }
+  .OALD{
+    .search{
+      height: 30px;
+      padding: 5px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      input{
+        width: 150px;
+      }
+    }
+    .item{
+      height: calc(100% - 100px);
+      padding: 10px;
+      box-sizing: border-box;
+      overflow:auto ;
+    }
+  }
+  .fantasy{
+    flex-grow: 1;
+    background-color: yellow;
+    h1{
+      font-size: 20px;
+      height: 39px;
+      line-height: 39px;
+      margin: 0;
+      padding: 10px;
+      border-bottom:1px solid black;
+    }
+    .content{
+      height: calc(100% - 60px);
+      white-space: normal;
+      overflow: auto;
+      ul {
+        & > li:first-child{
+          padding: 10px;
+        }
+        ol li {
+          list-style: decimal;
+        }
+      }
+    }
+  }
+}

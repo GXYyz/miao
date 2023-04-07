@@ -82,7 +82,7 @@
   width: 100%;
   min-width: 1380px;
   background-color: #fff;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 112px;
   white-space: nowrap;
 }
@@ -103,4 +103,103 @@
   top: 0;
   bottom: 0;
   left: 0;
+}
+.header .headerBottom .navGoods {
+  position: absolute;
+  top: 0;
+  left: 274px;
+}
+.header .headerBottom .navGoods li {
+  display: inline-block;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.header .headerBottom .navGoods li:first-child {
+  padding-left: 0;
+}
+.header .headerBottom .navGoods li:last-child {
+  padding-right: 0;
+}
+.header .headerBottom .navGoods li:hover a {
+  color: #ff6700;
+}
+.header .headerBottom .searchGoods {
+  height: 55px;
+  width: 334px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+.header .headerBottom .searchGoods input {
+  float: left;
+  width: 276px;
+  height: 53px;
+  padding: 5px;
+  font-size: 17px;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+.header .headerBottom .searchGoods button {
+  float: right;
+  width: 58px;
+  height: 53px;
+  padding: 0;
+  border: 1px solid #e0e0e0;
+  border-left: 0;
+  background-color: #fff;
+  cursor: pointer;
+}
+.header .headerBottom .searchGoods button i {
+  color: #8b8b8b;
+  font-size: 30px;
+}
+.header .headerBottom .searchGoods button:hover {
+  background-color: #ff6700;
+  border-color: #000;
+}
+.header .headerBottom .searchGoods button:hover > i {
+  color: #fff;
+}
+.header .headerBottom .searchGoods button:hover ~ input {
+  border-color: #000;
+}
+.header .pushGoods {
+  width: 100%;
+  height: 258px;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+  box-shadow: 0 2px 5px #d6d6d6;
+}
+.header .pushGoods li {
+  display: inline-block;
+  padding: 40px 0 35px 0;
+}
+.header .pushGoods li span {
+  width: 230px;
+}
+.header .pushGoods li span img {
+  height: 120px;
+  margin: 0 auto;
+}
+.banner {
+  height: 517px;
+  width: 100%;
+}
+.banner .aside {
+  height: 100%;
+  width: 262px;
+  background-color: #a5a3a3;
+  padding: 35px 20px 35px 30px;
+}
+.banner .aside ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.banner .aside ul li {
+  font-size: 16px;
 }

@@ -1,5 +1,6 @@
 @minWidth:1380px;
 @IB:inline-block;
+@miOrange:rgb(255,103,0);
 
 .header{
   width: 100%;
@@ -71,7 +72,7 @@
         display: none;
       }
       &:hover{
-        color: rgb(255,103,0);
+        color: @miOrange;
         background-color: #fff;
         #goodsMessage{
           display: block;
@@ -86,7 +87,7 @@
     width: 100%;
     min-width: @minWidth;
     background-color: #fff;
-    font-size: 19px;
+    font-size: 17px;
     line-height: 112px;
     white-space: nowrap;
     .headerLoge{
@@ -106,6 +107,108 @@
         bottom: 0;
         left: 0;
       }
+    }
+    .navGoods{
+      position: absolute;
+      top: 0;
+      left: 274px;
+      li{
+        display: inline-block;
+        padding: 0 10px;
+        cursor: pointer;
+        &:first-child{
+          padding-left: 0;
+        }
+        &:last-child{
+          padding-right: 0;
+        }
+        &:hover a{
+          color: @miOrange;
+        }
+      }
+    }
+    .searchGoods{
+      height: 55px;
+      width: 334px;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      input{
+        float: left;
+        width: 276px;
+        height: 53px;
+        padding: 5px;
+        font-size: 17px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+      }
+      button{
+        float: right;
+        width: 58px;
+        height: 53px;
+        padding: 0;
+        border: 1px solid #e0e0e0;
+        border-left: 0;
+        background-color: #fff;
+        cursor: pointer;
+        i{
+          color: #8b8b8b;
+          font-size: 30px;
+        }
+        &:hover{
+          background-color: @miOrange;
+          border-color: #000;
+          > i{
+            color: #fff;
+          }
+          ~ input{
+            border-color: #000;
+          }
+        }
+      }
+    }
+  }
+  // !!!!!!!!!!!!!!!未完成!!!!!!!!!!!!!
+  .pushGoods{
+    width: 100%;
+    height: 258px;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px #d6d6d6;
+    li{
+      display: inline-block;
+      padding: 40px 0 35px 0;
+      span{
+        width: 230px;
+        img{
+          height: 120px;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+  // !!!!!!!!!!!!!!!未完成!!!!!!!!!!!!!
+}
+.banner{
+  height: 517px;
+  width: 100%;
+  .aside{
+    height: 100%;
+    width: 262px;
+    background-color: #a5a3a3;
+    padding: 35px 20px 35px 30px;
+    ul{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      li{
+        font-size: 16px;
+      }
+        
     }
   }
 }

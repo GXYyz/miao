@@ -1,0 +1,81 @@
+/* 格式化 */
+html,
+body {
+  height: 100%;
+}
+input,
+button,
+html,
+body,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.app {
+  white-space: nowrap;
+  height: 100%;
+  width: 100%;
+  min-width: 800px;
+  display: flex;
+}
+.app > div {
+  height: 100%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 200px;
+}
+.app .message {
+  background-color: pink;
+  display: flow-root;
+}
+.app .message h1 {
+  font-size: 20px;
+  height: 40px;
+  line-height: 40px;
+  text-align: right;
+  margin: 0;
+  padding: 10px;
+}
+.app .OALD .search {
+  height: 30px;
+  padding: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.app .OALD .search input {
+  width: 150px;
+}
+.app .OALD .item {
+  height: calc(100% - 100px);
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto ;
+}
+.app .fantasy {
+  flex-grow: 1;
+  background-color: yellow;
+}
+.app .fantasy h1 {
+  font-size: 20px;
+  height: 39px;
+  line-height: 39px;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+.app .fantasy .content {
+  height: calc(100% - 60px);
+  white-space: normal;
+  overflow: auto;
+}
+.app .fantasy .content ul > li:first-child {
+  padding: 10px;
+}
+.app .fantasy .content ul ol li {
+  list-style: decimal;
+}
