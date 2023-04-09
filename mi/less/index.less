@@ -9,7 +9,8 @@
   position: fixed;
   bottom: 80px;
   right: 0;
-  // background-color: #dbdbdb;
+  z-index: 999;
+  background-color: #fff;
   ul{
     width: 100%;
     height: 100%;
@@ -28,6 +29,9 @@
         align-items: center;
         font-size: 17px;
         color: #757575;
+        &:hover{
+          color: @miOrange;
+        }
         .iconfont{
           font-size: 30px;
         }
@@ -414,6 +418,103 @@
         }
         img{
           width: 355px;
+        }
+      }
+    }
+  }
+}
+
+.mainGoods{
+  &::before,
+  &::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 135px;
+    margin: 30px 0;
+    background-image: url(../lib/img/mainbanner.webp);
+    background-size: auto 135px;
+    background-repeat: no-repeat;
+  }
+  .mainGoods-Phone{
+    .title{
+      width: 100%;
+      height: 60px;
+      display: block;
+      h1{
+        font-size: 22px;
+        font-weight: normal;
+        float: left;
+      }
+      a{
+        float: right;
+        display: block;
+        height: 48px;
+        line-height: 48px;
+        &::before{
+          content: '查看更多';
+        }
+        &:hover{
+          color: @miOrange;
+        }
+        &:hover .iconfont{
+          color: #fff;
+          background-color: @miOrange;
+        }
+        .iconfont{
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          font-size: 16px;
+          line-height: 24px;
+          padding-left: 5px;
+          border-radius: 50%;
+          background-color: #b0b0b0;
+          color: #fff;
+        }
+      }
+    }
+    .goodsCard{
+      width: 100%;
+      height: 690px;
+      display: flex;
+      img{
+        width: 263px;
+      }
+      .goodsCardAside{
+        height: 100%;
+        width: 263px;
+        margin-right: 16px;
+        &:hover{
+          box-shadow: 0 5px 10px #dbdbdb;
+          margin-top: -2px;
+          transition: .2s;
+        }
+      }
+      .goodsCardMain{
+        height: 100%;
+        width: 1100px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        a{
+          display: block;
+          height: 338px;
+          width: 263px;
+          padding: 20px 0;
+          background-color: #fff;
+          &:hover{
+            box-shadow: 0 5px 10px #dbdbdb;
+            margin-top: -2px;
+            transition: .2s;
+          }
+          .imgBox{
+            width: 160px;
+            margin: 0 auto 18px;
+            img{
+              width: 160px;
+            }
+          }
         }
       }
     }

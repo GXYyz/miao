@@ -4,6 +4,8 @@
   position: fixed;
   bottom: 80px;
   right: 0;
+  z-index: 999;
+  background-color: #fff;
 }
 .fixedAside ul {
   width: 100%;
@@ -25,6 +27,9 @@
   align-items: center;
   font-size: 17px;
   color: #757575;
+}
+.fixedAside ul li a:hover {
+  color: #ff6700;
 }
 .fixedAside ul li a .iconfont {
   font-size: 30px;
@@ -401,4 +406,96 @@
 }
 .banner-bottom .bests ul li img {
   width: 355px;
+}
+.mainGoods::before,
+.mainGoods::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 135px;
+  margin: 30px 0;
+  background-image: url(../lib/img/mainbanner.webp);
+  background-size: auto 135px;
+  background-repeat: no-repeat;
+}
+.mainGoods .mainGoods-Phone .title {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+.mainGoods .mainGoods-Phone .title h1 {
+  font-size: 22px;
+  font-weight: normal;
+  float: left;
+}
+.mainGoods .mainGoods-Phone .title a {
+  float: right;
+  display: block;
+  height: 48px;
+  line-height: 48px;
+}
+.mainGoods .mainGoods-Phone .title a::before {
+  content: '查看更多';
+}
+.mainGoods .mainGoods-Phone .title a:hover {
+  color: #ff6700;
+}
+.mainGoods .mainGoods-Phone .title a:hover .iconfont {
+  color: #fff;
+  background-color: #ff6700;
+}
+.mainGoods .mainGoods-Phone .title a .iconfont {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 5px;
+  border-radius: 50%;
+  background-color: #b0b0b0;
+  color: #fff;
+}
+.mainGoods .mainGoods-Phone .goodsCard {
+  width: 100%;
+  height: 690px;
+  display: flex;
+}
+.mainGoods .mainGoods-Phone .goodsCard img {
+  width: 263px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardAside {
+  height: 100%;
+  width: 263px;
+  margin-right: 16px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardAside:hover {
+  box-shadow: 0 5px 10px #dbdbdb;
+  margin-top: -2px;
+  transition: 0.2s;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain {
+  height: 100%;
+  width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a {
+  display: block;
+  height: 338px;
+  width: 263px;
+  padding: 20px 0;
+  background-color: #fff;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a:hover {
+  box-shadow: 0 5px 10px #dbdbdb;
+  margin-top: -2px;
+  transition: 0.2s;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .imgBox {
+  width: 160px;
+  margin: 0 auto 18px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .imgBox img {
+  width: 160px;
 }
