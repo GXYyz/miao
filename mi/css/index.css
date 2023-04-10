@@ -248,7 +248,30 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.banner .aside ul a {
+.banner .aside ul li .asideMore {
+  position: absolute;
+  top: 0;
+  left: 262px;
+  height: 100%;
+  max-width: 1117px;
+  background-color: #dbdbdb;
+  z-index: 999;
+  display: flex;
+  flex-flow: column wrap ;
+  justify-content: start;
+}
+.banner .aside ul li .asideMore:hover {
+  display: block;
+}
+.banner .aside ul li .asideMore a {
+  flex-grow: 1;
+  display: block;
+  height: 86px;
+  width: 300px;
+  background-color: pink;
+  border: 1px solid black;
+}
+.banner .aside ul li > a {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -256,7 +279,7 @@
   color: #f8f8f8;
   padding: 10px 20px 10px 30px;
 }
-.banner .aside ul a:hover {
+.banner .aside ul li > a:hover {
   background-color: #ff6700;
 }
 .banner .slider {
@@ -424,6 +447,8 @@
   display: block;
 }
 .mainGoods .mainGoods-Phone .title h1 {
+  height: 60px;
+  line-height: 60px;
   font-size: 22px;
   font-weight: normal;
   float: left;
@@ -431,11 +456,12 @@
 .mainGoods .mainGoods-Phone .title a {
   float: right;
   display: block;
-  height: 48px;
-  line-height: 48px;
+  height: 60px;
+  line-height: 60px;
 }
 .mainGoods .mainGoods-Phone .title a::before {
   content: '查看更多';
+  margin-right: 3px;
 }
 .mainGoods .mainGoods-Phone .title a:hover {
   color: #ff6700;
@@ -498,4 +524,23 @@
 }
 .mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .imgBox img {
   width: 160px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt {
+  width: 100%;
+  font-size: 16px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p.description {
+  color: #b0b0b0;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p.price {
+  color: #ff6700;
+  font-size: 18px;
+}
+.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p.price del {
+  color: #d0d0d0;
 }

@@ -258,18 +258,42 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      a{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        font-size: 16px;
-        color: #f8f8f8;
-        padding: 10px 20px 10px 30px;
-        &:hover{
-          background-color: @miOrange;
+      li{
+        .asideMore{
+          position: absolute;
+          top: 0;
+          left: 262px;
+          height: 100%;
+          max-width: 1117px;
+          background-color: #dbdbdb;
+          z-index: 999;
+          display: flex;
+          flex-flow:column wrap ;
+          justify-content: start;
+          &:hover{
+            display: block;
+          }
+          a{
+            flex-grow: 1;
+            display: block;
+            height: 86px;
+            width: 300px;
+            background-color: pink;
+            border: 1px solid black;
+          }
+        }
+        & > a{
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          font-size: 16px;
+          color: #f8f8f8;
+          padding: 10px 20px 10px 30px;
+          &:hover{
+            background-color: @miOrange;
+          }
         }
       }
-        
     }
   }
   // 轮播图
@@ -442,6 +466,8 @@
       height: 60px;
       display: block;
       h1{
+        height: 60px;
+        line-height: 60px;
         font-size: 22px;
         font-weight: normal;
         float: left;
@@ -449,10 +475,11 @@
       a{
         float: right;
         display: block;
-        height: 48px;
-        line-height: 48px;
+        height: 60px;
+        line-height: 60px;
         &::before{
           content: '查看更多';
+          margin-right: 3px;
         }
         &:hover{
           color: @miOrange;
@@ -514,6 +541,26 @@
             img{
               width: 160px;
             }
+          }
+          .goodsAlt{
+            width: 100%;
+            font-size: 16px;
+            p{
+              width: 100%;
+              text-align: center;
+              margin: 10px 0;
+              &.description{
+                color: #b0b0b0;
+              }
+              &.price{
+                color: @miOrange;
+                font-size: 18px;
+                del{
+                  color: #d0d0d0;
+                }
+              }
+            }
+            
           }
         }
       }
