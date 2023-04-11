@@ -433,6 +433,9 @@
   color: #c0bdba;
   font-size: 14px;
 }
+.banner-bottom .navMoreServer ul li a:hover {
+  color: #fff;
+}
 .banner-bottom .bests {
   width: 1117px;
   height: 191px;
@@ -465,36 +468,42 @@
   background-size: auto 135px;
   background-repeat: no-repeat;
 }
-.mainGoods .mainGoods-Phone .title {
+.mainGoods::before {
+  margin-bottom: 0;
+}
+.mainGoods .mainGoods-children {
+  margin-top: 30px;
+}
+.mainGoods .mainGoods-children .title {
   width: 100%;
   height: 60px;
   display: block;
 }
-.mainGoods .mainGoods-Phone .title h1 {
+.mainGoods .mainGoods-children .title h1 {
   height: 60px;
   line-height: 60px;
   font-size: 22px;
   font-weight: normal;
   float: left;
 }
-.mainGoods .mainGoods-Phone .title a {
+.mainGoods .mainGoods-children .title a {
   float: right;
   display: block;
   height: 60px;
   line-height: 60px;
 }
-.mainGoods .mainGoods-Phone .title a::before {
+.mainGoods .mainGoods-children .title a::before {
   content: '查看更多';
   margin-right: 3px;
 }
-.mainGoods .mainGoods-Phone .title a:hover {
+.mainGoods .mainGoods-children .title a:hover {
   color: #ff6700;
 }
-.mainGoods .mainGoods-Phone .title a:hover .iconfont {
+.mainGoods .mainGoods-children .title a:hover .iconfont {
   color: #fff;
   background-color: #ff6700;
 }
-.mainGoods .mainGoods-Phone .title a .iconfont {
+.mainGoods .mainGoods-children .title a .iconfont {
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -505,66 +514,221 @@
   background-color: #b0b0b0;
   color: #fff;
 }
-.mainGoods .mainGoods-Phone .goodsCard {
+.mainGoods .mainGoods-children .goodsCard {
   width: 100%;
   height: 690px;
   display: flex;
 }
-.mainGoods .mainGoods-Phone .goodsCard img {
+.mainGoods .mainGoods-children .goodsCard img {
   width: 263px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardAside {
+.mainGoods .mainGoods-children .goodsCard .goodsCardAside {
   height: 100%;
   width: 263px;
   margin-right: 16px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardAside:hover {
+.mainGoods .mainGoods-children .goodsCard .goodsCardAside:hover {
   box-shadow: 0 5px 10px #dbdbdb;
   margin-top: -2px;
   transition: 0.2s;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain {
   height: 100%;
   width: 1100px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a {
   display: block;
   height: 338px;
   width: 263px;
   padding: 20px 0;
   background-color: #fff;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a:hover {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a:hover {
   box-shadow: 0 5px 10px #dbdbdb;
   margin-top: -2px;
   transition: 0.2s;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .imgBox {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .imgBox {
   width: 160px;
   margin: 0 auto 18px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .imgBox img {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .imgBox img {
   width: 160px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .goodsAlt {
   width: 100%;
   font-size: 16px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .goodsAlt p {
   width: 100%;
   text-align: center;
   margin: 10px 0;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p.description {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .goodsAlt p.description {
   color: #b0b0b0;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p.price {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .goodsAlt p.price {
   color: #ff6700;
   font-size: 18px;
 }
-.mainGoods .mainGoods-Phone .goodsCard .goodsCardMain a .goodsAlt p.price del {
+.mainGoods .mainGoods-children .goodsCard .goodsCardMain a .goodsAlt p.price del {
   color: #d0d0d0;
+}
+.mainGoods .mainGoods-children.morePage .title {
+  height: 60px;
+  width: 100%;
+  display: block;
+}
+.mainGoods .mainGoods-children.morePage .title h1 {
+  height: 60px;
+  line-height: 60px;
+  font-size: 22px;
+  font-weight: normal;
+  float: left;
+}
+.mainGoods .mainGoods-children.morePage .title .moreTab {
+  width: 108px;
+  height: 60px;
+  font-size: 18px;
+  float: right;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 17px;
+}
+.mainGoods .mainGoods-children.morePage .title .moreTab li {
+  line-height: 60px;
+  cursor: pointer;
+}
+.mainGoods .mainGoods-children.morePage .active {
+  color: #ff6700;
+  border-bottom: 2px solid #ff6700;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard {
+  width: 100%;
+  height: 690px;
+  display: flex;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard img {
+  width: 263px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardAside {
+  height: 100%;
+  width: 263px;
+  margin-right: 16px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardAside:hover {
+  box-shadow: 0 5px 10px #dbdbdb;
+  margin-top: -2px;
+  transition: 0.2s;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain {
+  height: 100%;
+  width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a {
+  display: block;
+  height: 338px;
+  width: 263px;
+  padding: 20px 0;
+  background-color: #fff;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a:hover {
+  box-shadow: 0 5px 10px #dbdbdb;
+  margin-top: -2px;
+  transition: 0.2s;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .imgBox {
+  width: 160px;
+  margin: 0 auto 18px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .imgBox img {
+  width: 160px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .goodsAlt {
+  width: 100%;
+  font-size: 16px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .goodsAlt p {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .goodsAlt p.description {
+  color: #b0b0b0;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .goodsAlt p.price {
+  color: #ff6700;
+  font-size: 18px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain a .goodsAlt p.price del {
+  color: #d0d0d0;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard {
+  width: 263px;
+  height: 338px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .smallCard {
+  height: 160px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .smallCard a {
+  display: flex;
+  justify-content: space-between;
+  height: 160px;
+  width: 263px;
+  padding: 45px 20px 20px 33px;
+  background-color: #fff;
+  font-size: 16px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .smallCard a .samllgoodsAlt {
+  width: 100px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .smallCard a .samllgoodsAlt .description {
+  color: #b0b0b0;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .smallCard a .samllgoodsAlt .price {
+  font-size: 18px;
+  color: #ff6700;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .smallCard a img {
+  width: 80px;
+  height: 80px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .lookMore {
+  height: 160px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .lookMore a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 160px;
+  width: 263px;
+  padding: 20px 0;
+  background-color: #fff;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .lookMore a:hover {
+  box-shadow: 0 5px 10px #dbdbdb;
+  margin-top: -2px;
+  transition: 0.2s;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .lookMore a div {
+  font-size: 22px;
+  margin-right: 55px;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .lookMore a div p {
+  font-size: 14px;
+  color: #757575;
+}
+.mainGoods .mainGoods-children.morePage .goodsCard .goodsCardMain .doubleCard .lookMore a i {
+  font-weight: 700;
+  font-size: 60px;
+  color: #ff6700;
 }
