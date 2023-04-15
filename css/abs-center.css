@@ -1,0 +1,168 @@
+div.father1 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  display: flow-root;
+}
+div.father1 .sonMargin {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  margin: 25px auto;
+  line-height: 50px;
+  text-align: center;
+}
+div.father2 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  position: relative;
+}
+div.father2 .sonPosition {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: calc(100%/2 - 50px/2);
+  line-height: 50px;
+  text-align: center;
+}
+div.father3 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.father3 .sonFlex {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  line-height: 50px;
+  text-align: center;
+}
+div.father4 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+div.father4 .sonGrid {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  line-height: 50px;
+  text-align: center;
+}
+div.father5 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  position: relative;
+}
+div.father5 .sontranslate {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 50px;
+  text-align: center;
+}
+div.father6 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  display: grid;
+  grid: 1fr 50px 1fr / 100%;
+}
+div.father6::after,
+div.father6::before {
+  content: '';
+}
+div.father6 .sonGrid {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  margin: 0 auto;
+  line-height: 50px;
+  text-align: center;
+}
+div.father7 {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0;
+}
+div.father7 .sonInlineBlock {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  vertical-align: middle;
+  font-size: 16px;
+  line-height: 50px;
+}
+div.father8 {
+  width: 100%;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0;
+}
+div.father8::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+div.father8 .sonFakeElement {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  background-color: #fff;
+  vertical-align: middle;
+}
+div.father9 {
+  width: 300px;
+  height: 100px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0;
+}
+div.father9 .sonTable {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #fff;
+}
