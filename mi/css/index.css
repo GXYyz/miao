@@ -247,6 +247,10 @@
   float: left;
   font-size: 0;
 }
+.header .headerBottom .navGoods:hover > li > .navGoodsMore {
+  top: 112px;
+  transition: top 0.5s;
+}
 .header .headerBottom .navGoods li {
   display: inline-block;
   padding: 0 10px;
@@ -263,8 +267,7 @@
   color: #ff6700;
 }
 .header .headerBottom .navGoods li:hover .navGoodsMore {
-  top: 112px;
-  transition: top 0.5s;
+  z-index: -1;
 }
 .header .headerBottom .navGoods li .navGoodsMore {
   position: absolute;

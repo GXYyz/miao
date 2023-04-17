@@ -263,6 +263,10 @@
     .navGoods{
       float: left;
       font-size: 0;
+      &:hover > li > .navGoodsMore{
+        top: 112px;
+        transition: top .5s;
+      }
       li{
         display: inline-block;
         padding: 0 10px;
@@ -278,8 +282,7 @@
           color: @miOrange;
         }
         &:hover .navGoodsMore{
-          top: 112px;
-          transition: top .5s;
+          z-index: -1;
         }
         .navGoodsMore{
           position: absolute;
