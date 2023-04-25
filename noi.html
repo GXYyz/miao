@@ -22,7 +22,7 @@
   let b = +prompt('b')
   let c = +prompt('c')
 
-  let answer = (a + b) / c
+  let answer = Math.trunc((a + b) / c)
 
   console.log(answer);
 </script>
@@ -76,7 +76,7 @@
 
   let answer = 5 * (f - 32) / 9
 
-  console.log(Number(answer.toFixed(5)));
+  console.log(answer.toFixed(5));
 
 </script>
 
@@ -90,7 +90,7 @@
 
   let s = Math.PI * r ** 2
 
-  console.log(Number(d.toFixed(4)),Number(c.toFixed(4)),Number(s.toFixed(4)));
+  console.log(d.toFixed(4),c.toFixed(4),s.toFixed(4));
 
 </script>
 
@@ -109,7 +109,7 @@
 
   let answer = a % b
 
-  console.log(answer);
+  console.log(answer.toFixed(4));
   // 73.263 0.9973
   // 0.4601
 </script>
@@ -177,7 +177,7 @@
   let c = Math.sqrt((Math.abs(x1 - x3) ** 2) + (Math.abs(y1 - y3) ** 2))
 
   let answer = 0.25 * Math.sqrt((a + b + c) * (a + b - c) * (a + c -b) * (b + c - a))
-  console.log(Number(answer.toFixed(2)))
+  console.log(answer.toFixed(2))
 </script>
 
 <script id="ch0103/18">
