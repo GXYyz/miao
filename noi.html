@@ -243,7 +243,7 @@
   let a = prompt('a')
   let b = prompt('b')
 
-  console.log(a > 10 && b > 20 ? 1 : 0 )
+  console.log(a > 10 || b > 20 ? 1 : 0 )
 </script>
 
 <script id="ch0104/08">
@@ -268,6 +268,128 @@
   let b = +prompt('b')
   
   console.log(a > 60 ^ b > 60 ? 1 : 0 )
+</script>
+
+<script id="ch0104/11">
+  let n = prompt('N')
+
+  console.log(n != 1 && n != 3 && n != 5 ? 'YES' : 'NO')
+</script>
+
+<script id="ch0104/12">
+  let s = +prompt('s')
+
+  let bikeT = s / 3 + 50
+  let walkT = s / 1.2
+
+  console.log(bikeT == walkT ? 'ALL' : bikeT > walkT ? 'Walk' : 'Bike')
+</script>
+
+<script id="ch0104/13">
+  let x = +prompt('N')
+
+  let y = 0
+
+  if(x >= 0 && x < 5){
+    y = -x + 2.5
+  }else if(x >= 5 && x < 10){
+    y =2 - 1.5 * (x - 3) * (x - 3)
+  }else{
+    y = x / 2 - 1.5
+  }
+
+  console.log(y.toFixed(3))
+</script>
+
+<script id="ch0104/14">
+  let m = +prompt('M')
+  let k = prompt('K')
+
+  let answer = 0
+
+  if (m <= 1000) {
+    answer += 8
+  }else{
+    answer = 8 + (Math.ceil((m - 1000) / 500)) * 4
+  }
+
+  console.log(k == 'y' ? answer + 5 : answer);
+</script>
+
+<script id="ch0104/15">
+  let a = +prompt('a')
+  let b = +prompt('b')
+  let c = +prompt('c')
+
+  let answer = Math.max(a,b,c)
+
+  console.log(answer);
+</script>
+
+<script id="ch0104/16">
+  let a = +prompt('a')
+  let b = +prompt('b')
+  let c = +prompt('c')
+
+  console.log(a + b > c && a + c > b && b + c > a ? 'yes' : 'no');
+</script>
+
+<script id="ch0104/17">
+  let i = +prompt('a')
+
+  console.log(i % 400 == 0 ? 'Y' : (i % 100 % 4 == 0 ? 'Y' : 'N'));
+</script>
+
+<script id="ch0104/18">
+  let x = +prompt('x')
+  let y = +prompt('y')
+
+  console.log(x <= 1 && x >= -1 && y <= 1 && y >= -1 ? 'yes' : 'no' )
+</script>
+
+<script id="ch0104/19">
+  let x = +prompt('x')
+  let y = +prompt('y')
+  let f = prompt('F')
+
+  if (f == '+') {
+    console.log( x + y);
+  }else if(f == '-'){
+    console.log(x - y)
+  }else if(f == '*'){
+    console.log(x * y)
+  }else if(f == '/'){
+    console.log(y == 0 ? 'Divided by zero!' : x / y)
+  }else{
+    console.log('Invalid operator!')
+  }
+</script>
+
+<script id="ch0104/20">
+  let a = +prompt('a')
+  let b = +prompt('b')
+  let c = prompt('c')
+
+  if (b ** 2 == 4 * a * c) {
+    let answer = (-b + Math.sqrt(b ** 2 - 4 * a * c)) / 2 * a
+    console.log(`x1=x2=${answer.toFixed(5)}`)
+  }else if(b ** 2 > 4 * a * c){
+    let answer1 = (-b + Math.sqrt(b ** 2 - 4 * a * c)) / 2 * a
+    let answer2 = (-b - Math.sqrt(b ** 2 - 4 * a * c)) / 2 * a
+    console.log(`x1=${answer1.toFixed(5)};x2=${answer2.toFixed(5)}`)
+  }else if(b ** 2 < 4 * a * c){
+    let s = -b / (2 * a)
+    let x = (Math.sqrt(4 * a * c - b ** 2)) / 2 * a
+    console.log(`x1=${s.toFixed(5)}+${x.toFixed(5)}i;x2=${s.toFixed(5)}-${x.toFixed(5)}i`)
+  }
+</script>
+
+<script id="ch0104/21">
+  let n = +prompt('n')
+  let x = +prompt('x')
+  let y = prompt('y')
+
+  console.log(n - Math.ceil(y / x))
 </script>
 
 
