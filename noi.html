@@ -127,8 +127,8 @@
   let x = +prompt('x')
 
   let g = x % 10 + ''
-  let s = Math.trunc(x % 10) % 10 + ''
-  let b = Math.trunc(x / 100) + ''
+  let s = Math.floor(x / 10) % 10 + ''
+  let b = Math.floor(x / 100) + ''
 
   let answer = g + s + b
 
