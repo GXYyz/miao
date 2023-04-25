@@ -1,0 +1,212 @@
+<script id="ch0103/01">
+  let a = +prompt('a')
+  let b = +prompt('b')
+
+  let answer = a + b
+
+  console.log(answer);
+</script>
+
+<script id="ch0103/02">
+  let a = +prompt('a')
+  let b = +prompt('b')
+  let c = +prompt('c')
+
+  let answer = (a + b) * c
+
+  console.log(answer);
+</script>
+
+<script id="ch0103/03">
+  let a = +prompt('a')
+  let b = +prompt('b')
+  let c = +prompt('c')
+
+  let answer = (a + b) / c
+
+  console.log(answer);
+</script>
+
+<script id="ch0103/04">
+  let a = +prompt('a')
+  let b = +prompt('b')
+
+  let answer1 = Math.trunc(a / b)
+  let answer2 = a % b
+
+  console.log(answer1,answer2);
+</script>
+
+<script id="ch0103/05">
+  let a = +prompt('a')
+  let b = +prompt('b')
+
+  let answer = a / b - Math.trunc(a / b)
+
+  console.log(Number(answer.toFixed(9)));
+</script>
+
+<script id="ch0103/06">
+  let a = +prompt('a')
+  let b = +prompt('b')
+
+  let answer = (b / a) * 100
+
+  console.log(answer.toFixed(3) + '%');
+</script>
+
+<script id="ch0103/07">
+  let x = +prompt('x')
+  let a = +prompt('a')
+  let b = +prompt('b')
+  let c = +prompt('c')
+  let d = +prompt('d')
+  
+
+  let answer = a * x ** 3 + b * x ** 2 + c * x + d
+
+  console.log(Number(answer.toFixed(7)));
+
+  // 2.31 1.2 2 2 3
+  // 33.0838692
+</script>
+
+<script id="ch0103/08">
+  let f = +prompt('F')
+
+  let answer = 5 * (f - 32) / 9
+
+  console.log(Number(answer.toFixed(5)));
+
+</script>
+
+<script id="ch0103/09">
+  let r = +prompt('R')
+
+
+  let d = 2 * r
+
+  let c = Math.PI * d 
+
+  let s = Math.PI * r ** 2
+
+  console.log(Number(d.toFixed(4)),Number(c.toFixed(4)),Number(s.toFixed(4)));
+
+</script>
+
+<script id="ch0103/10">
+  let r1 = +prompt('r1')
+  let r2 = +prompt('r2')
+
+  let R = 1 / (1 / r1 + 1 / r2)
+
+  console.log(Number(R.toFixed(2)));
+</script>
+
+<script id="ch0103/11">
+  let a = +prompt('a')
+  let b = +prompt('b')
+
+  let answer = a % b
+
+  console.log(answer);
+  // 73.263 0.9973
+  // 0.4601
+</script>
+
+<script id="ch0103/12">
+  let r = +prompt('R')
+
+  let pi = 3.14
+  let v = 4 / 3 * pi * r ** 3
+
+  console.log(Number(v.toFixed(2)));
+</script>
+
+<script id="ch0103/13">
+  let x = +prompt('x')
+
+  let g = x % 10 + ''
+  let s = Math.trunc(x % 10) % 10 + ''
+  let b = Math.trunc(x / 100) + ''
+
+  let answer = g + s + b
+
+  console.log(answer);
+</script>
+
+<script id="ch0103/14">
+  let h = +prompt('h')
+  let r = +prompt('r')
+
+  let x = 20 / (((Math.PI * (r ** 2)) * h) / 1000)
+
+  console.log(x)
+</script>
+
+<script id="ch0103/15">
+  let n = +prompt('n')
+  let x = +prompt('x')
+  let y = +prompt('y')
+
+  let answer = n - Math.ceil(y / x)
+
+  console.log(answer)
+</script>
+
+<script id="ch0103/16">
+  let x1 = +prompt('x1')
+  let y1 = +prompt('y1')
+  let x2 = +prompt('x2')
+  let y2 = +prompt('y2')
+
+  let answer = Math.sqrt((Math.abs(x1 - x2) ** 2) + (Math.abs(y1 - y2) ** 2))
+  console.log(Number(answer.toFixed(3)))
+</script>
+
+<script id="ch0103/17">
+  let x1 = +prompt('x1')
+  let y1 = +prompt('y1')
+  let x2 = +prompt('x2')
+  let y2 = +prompt('y2')
+  let x3 = +prompt('x3')
+  let y3 = +prompt('y3')
+
+  let a = Math.sqrt((Math.abs(x1 - x2) ** 2) + (Math.abs(y1 - y2) ** 2))
+  let b = Math.sqrt((Math.abs(x2 - x3) ** 2) + (Math.abs(y2 - y3) ** 2))
+  let c = Math.sqrt((Math.abs(x1 - x3) ** 2) + (Math.abs(y1 - y3) ** 2))
+
+  let answer = 0.25 * Math.sqrt((a + b + c) * (a + b - c) * (a + c -b) * (b + c - a))
+  console.log(Number(answer.toFixed(2)))
+</script>
+
+<script id="ch0103/18">
+  let a1 = +prompt('a1')
+  let a2 = +prompt('a2')
+  let n = +prompt('n')
+
+  let answer = (a2 - a1) * (n - 1) + a1
+
+  console.log(answer)
+</script>
+
+<script id="ch0103/19">
+  let a = +prompt('a')
+  let b = +prompt('b')
+
+  let answer = a * b
+
+  console.log(answer);
+</script>
+
+<script id="ch0103/20">
+  let n = +prompt('n')
+
+  let answer = 2 ** n
+
+  console.log(answer)
+
+</script>
+
+
+
