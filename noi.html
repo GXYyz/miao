@@ -235,23 +235,24 @@
 </script>
 
 <script id="ch0104/06">
-  let x = prompt('x')
-  let y = prompt('y')
-  console.log(x == y ? '=' : (x > y ? '>' : '<'))
-</script>
-
-<script id="ch0104/07">
   let n = prompt('N')
   console.log((n / 10) > 1 ? 1 : 0 )
 </script>
 
+<script id="ch0104/07">
+  let a = prompt('a')
+  let b = prompt('b')
+
+  console.log(a > 10 && b > 20 ? 1 : 0 )
+</script>
+
 <script id="ch0104/08">
   let n = prompt('N')
-  console.log(n % 3 == 0 && n % 5 == 0 ? 'yes' : 'no')
+  console.log(n % 3 == 0 && n % 5 == 0 ? 'YES' : 'NO')
 </script>
 
 <script id="ch0104/09">
-  let n = +prompt('N')
+   let n = +prompt('N')
   let i = 0
   let arr = [3,5,7]
   let answer = ''
@@ -259,7 +260,7 @@
     if(n % item == 0) answer += item + ' '
   });
   
-  console.log(answer == '' ? 'n' : answer)
+  console.log(answer == '' ? 'n' : answer.trim())
 </script>
 
 <script id="ch0104/10">
