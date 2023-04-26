@@ -652,10 +652,10 @@
   for (let i = 0; i < 10; i++) {
     sum += h
     h = h / 2
-    sum += h
+    i == 9 ? sum : sum += h
   }
 
-  console.log(sum,h);
+  console.log(sum.toFixed(4),h.toFixed(7));
 </script>
 
 
