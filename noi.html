@@ -596,6 +596,21 @@
   console.log(years <= 20 ? years : 'Impossible');
 </script>
 
+<script id="ch0105/17">
+  let k = +prompt('K')
+  let n1 = 0
+  let n2 = 0
+  for(let i = 0; i <= k - 1; i ++){
+    if(i < 1) {n1 = 1}
+    else {n1 = n1 + n2}
+
+    if(i < 2) {n2 = i}
+    else {n2 = n1 - n2}
+  }
+  console.log(n1);
+  // md cup烧了
+</script>
+
 
 
 
