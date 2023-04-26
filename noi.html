@@ -400,48 +400,56 @@
   }
   let content = arr.reduce((total, num) => {return total + num}) / n
   console.log(content.toFixed(2));
-  </script>
-  
-  <script id="ch0105/02">
-    let arr = []
-    for (let i = 1; i <= 12 ; i ++){
-      arr.push(+prompt(`num${i}`))
-    }
-    let content = arr.reduce((total,num) => {return total + num}) / 12
-    console.log(`$${content.toFixed(2)}`)
-  </script>
-  
-  <script id="ch0105/03">
-    let n = +prompt("n")
-    let num = prompt('num')
-    let arr = num.split(" ")
-    let content = arr.map(item => Number(item)).reduce((total ,num) => {
-      return total + num
-    }) / n
-    console.log(content.toFixed(4))
-  </script>
-  <script id="ch0105/04">
-    let n = +prompt('n')
-    let arr = []
-    for(i = 1; i <= n; i ++){
-      arr.push(+prompt(`num${i}`))
-    }
-  
-    let sum = arr.reduce((total, num) => {return total + num})
-    let content = (sum / n).toFixed(5)
-    console.log(`${sum} ${content}`)
-  </script>
-  
-  <script id="ch0105/05">
-    let n = +prompt('n')
-    let num = prompt('num')
-    let arr = num.split(' ')
-    let i = 0
-    let content = arr.map(item => Number(item)).forEach(item => {
-      if(item > i) i = item
-    })
-    console.log(i);
-  </script>
+</script>
+
+<script id="ch0105/02">
+  let arr = []
+  for (let i = 1; i <= 12 ; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+  let content = arr.reduce((total,num) => {return total + num}) / 12
+  console.log(`$${content.toFixed(2)}`)
+</script>
+
+<script id="ch0105/03">
+  let n = +prompt("n")
+  // let num = prompt('num')
+  // let arr = num.split(" ")
+  let arr = []
+  for(i = 1; i <= n; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+  let content = arr.map(item => Number(item)).reduce((total ,num) => {
+    return total + num
+  }) / n
+  console.log(content.toFixed(4))
+</script>
+<script id="ch0105/04">
+  let n = +prompt('n')
+  let arr = []
+  for(i = 1; i <= n; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+
+  let sum = arr.reduce((total, num) => {return total + num})
+  let content = (sum / n).toFixed(5)
+  console.log(`${sum} ${content}`)
+</script>
+
+<script id="ch0105/05">
+  let n = +prompt('n')
+  // let num = prompt('num')
+  // let arr = num.split(' ')
+  let arr = []
+  for(let i = 1; i <= n; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+  let i = 0
+  let content = arr.map(item => Number(item)).forEach(item => {
+    if(item > i) i = item
+  })
+  console.log(i);
+</script>
 
 
 
