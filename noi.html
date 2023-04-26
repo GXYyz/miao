@@ -611,6 +611,53 @@
   // md cup烧了
 </script>
 
+<script id="ch0105/18">
+  let n = +prompt('N')
+  let arr = []
+  for(let i = 0; i < n; i ++){
+    arr[i] = []
+    for(let j = 0;j < 2; j ++){
+      arr[i].push(+prompt(`第${i + 1}组 num${j + 1}`))
+    }
+  }
+  let oldValue = arr[0][1] / arr[0][0]
+  for (let i = 1; i < arr.length; i++) {
+    let dValue = arr[i][1] / arr[i][0]  - oldValue
+    if (dValue > 0.05) {
+      console.log('better');
+    }else if(dValue < -0.05){
+      console.log('worse');
+    }else{
+      console.log('same');
+    }
+  }
+</script>
+
+<script id="ch0105/19">
+  let n = +prompt('n')
+  let time = 0
+  for(let i = 0; i < n; i ++){
+    let x = +prompt('x')
+    let y = +prompt('y')
+    let num = +prompt('humanNum')
+
+    time += Math.sqrt(x ** 2 + y ** 2) / 25 + num * 1.5
+  }
+  console.log(Math.ceil(time));
+</script>
+
+<script id="ch0105/20">
+  let h = +prompt('h')
+  let sum = 0
+  for (let i = 0; i < 10; i++) {
+    sum += h
+    h = h / 2
+    sum += h
+  }
+
+  console.log(sum,h);
+</script>
+
 
 
 
