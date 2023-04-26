@@ -445,10 +445,155 @@
     arr.push(+prompt(`num${i}`))
   }
   let i = 0
-  let content = arr.map(item => Number(item)).forEach(item => {
+  arr.map(item => Number(item)).forEach(item => {
     if(item > i) i = item
   })
   console.log(i);
+</script>
+
+<script id="ch0105/06">
+  let n = +prompt('n')
+  // let num = prompt('num')
+  // let arr = num.split(' ')
+  let arr = []
+  for(let i = 1; i <= n; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+  let max = 0
+  let min = 99999
+  arr.map(item => Number(item)).forEach(item => {
+    if(item > max) max = item
+  })
+  arr.map(item => Number(item)).forEach(item => {
+    if(item < min) min = item
+  })
+  console.log(max - min)
+</script>
+
+<script id="ch0105/07">
+  let n = +prompt('n')
+  let arr1 = []
+  let arr2 = []
+  let arr3 = []
+  for(let j = 1; j <= n; j ++){
+    let arr = []
+    for(let i = 1; i <= 3; i ++){
+      arr.push(+prompt(`day${j} num${i}`))
+    }
+    arr1.push(arr[0])
+    arr2.push(arr[1])
+    arr3.push(arr[2])
+    arr = []
+  }
+  // console.log(arr1,arr2,arr3)
+  let gold = arr1.reduce((total, num) => {return total + num})
+  let silver = arr2.reduce((total, num) => {return total + num})
+  let copper = arr3.reduce((total, num) => {return total + num})
+  let sum = gold + silver + copper
+  console.log(`${gold} ${silver} ${copper} ${sum}`)
+</script>
+
+<script id="ch0105/08">
+  let n = +prompt('n')
+  let arr = []
+  for(let i = 1; i < n; i ++){
+    arr.push(+prompt(`degrees${i}`))
+  }
+  let sumDegrees = (n - 2) * 180
+  let theDegrees = sumDegrees - arr.reduce((total,sum) => {return total + sum})
+  console.log(theDegrees);
+</script>
+
+<script id="ch0105/09">
+  let m = +prompt('m')
+  let n = +prompt('n')
+  let arr = []
+  for(let i = m; i <= n; i ++){
+    if(i % 2 != 0) arr.push(i)
+  }
+  let sum = arr.reduce((total,sum) => {return total + sum})
+  console.log(sum)
+</script>
+
+<script id="ch0105/10">
+  let m = +prompt('m')
+  let n = +prompt('n')
+  let arr = []
+  for(let i = m; i <= n; i ++){
+    if(i % 17 == 0) arr.push(i)
+  }
+  let sum = arr.reduce((total,sum) => {return total + sum})
+  console.log(sum)
+</script>
+
+<script id="ch0105/11">
+  let n = +prompt('k')
+  let arr = []
+  for(let i = 1; i <= n; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+  let arr1 = arr.filter(item => {return item == 1})
+  let arr5 = arr.filter(item => {return item == 5})
+  let arr10 = arr.filter(item => {return item == 10})
+  console.log(arr1.length);
+  console.log(arr5.length);
+  console.log(arr10.length);
+</script>
+
+<script id="ch0105/12">
+  let n = +prompt('N')
+  let m = +prompt('m')
+  let arr = []
+  for(let i = 1; i <= n; i ++){
+    arr.push(+prompt(`num${i}`))
+  }
+  arr = arr.filter(item => {return item == m})
+  console.log(arr.length);
+</script>
+
+<script id="ch0105/13">
+  let a = +prompt('a')
+  let n = +prompt('n')
+  console.log(a ** n)
+</script>
+
+<script id="ch0105/14">
+  let x = +prompt('x')
+  let n = +prompt('n')
+
+  for(let i = 0; i < n;i ++){
+    x += x * 0.001
+  }
+  console.log(x.toFixed(4))
+</script>
+
+<script id="ch0105/15">
+  let r = +prompt('R')
+  let m = +prompt('m')
+  let y = +prompt('Y')
+
+  for(let i = 0; i < y;i ++){
+    m += m * (r / 100)
+  }
+  console.log(Math.trunc(m))
+</script>
+
+<script id="ch0105/16">
+  let n = +prompt('年薪')
+  let k = +prompt('房价增长率')
+  let sum = 200
+  let money = 0
+  let years = 0
+
+  for(let i = 1;i < Infinity ;i++){
+    money += n
+    if(money >= sum || i == 99) {
+      years = i
+      break
+    }
+    sum += sum * (k / 100)
+  }
+  console.log(years <= 20 ? years : 'Impossible');
 </script>
 
 
