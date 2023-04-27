@@ -744,7 +744,21 @@
       }
     }
   }
-  console.log(49 * x + 7 * y + z)
+  console.log(49 * x + 7 * y + z,x * 100 + y * 10 + z,z * 100 + y * 10 + x)
+</script>
+
+<script id="ch0105/26" type="">
+  let n = +prompt('n')
+  let sum = 0
+  for(let i = 1; i <= n; i ++){
+    let num = +prompt(`num${i}`)
+    let g = num % 10
+    let s = Math.trunc(num % 100 / 10)
+    let b = Math.trunc(num % 1000 / 100)
+    let q = Math.trunc(num / 1000)
+    if(g - q - b - s >= 0) sum ++
+  }
+  console.log(sum);
 </script>
 
 
