@@ -709,6 +709,45 @@
   console.log(x);
 </script>
 
+<script id="ch0105/24">
+  let n = +prompt('N')
+  let time1 = 0
+  let time2 = 0
+  for(let i = 0; i < n; i ++){
+    let height = +prompt('height')
+    let low  = +prompt('low')
+
+    if (height >= 90 && height <= 140 && low >= 60 && low <= 90) {
+      time1 ++
+      if (i == n - 1 && time1 > time2) time2 = time1
+    }else if(time1 > time2){
+      time2 = time1
+      time1 = 0
+    }
+  }
+  console.log(time2);
+</script>
+
+<script id="ch0105/25">
+  let x = 0
+  let y = 0
+  let z = 0
+  for(let i = 1; i <= 6; i ++){
+    for(let j = 0; j <= 6; j ++){
+      for(let k = 1; k <= 6; k ++){
+        if (48 * i - 2 * j - 80 * k == 0) {
+          x = i
+          y = j
+          z = k
+          break
+        }
+      }
+    }
+  }
+  console.log(49 * x + 7 * y + z)
+</script>
+
+
 
 
 
