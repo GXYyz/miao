@@ -884,6 +884,38 @@
   console.log(e.toFixed(10))
 </script>
 
+<script id="ch0105/36">
+  let x = +prompt('X')
+  let n = +prompt('N')
+  let sum = 0
+
+  for (let i = 0; i <= n; i++) {
+    sum += x ** (n - i)
+  }
+  console.log(sum.toFixed(2));
+</script>
+
+<script id="ch0105/37">
+  // debugger
+  let m = +prompt('M')
+  let n = +prompt('N')
+  let x = +prompt('X')
+  let power = 0
+  while(x - Math.ceil(m / n) >= 0){
+    x = x - Math.ceil(m / n)
+    power = m
+    while(power != 0){
+      if(power - n >= 0){
+        power = power - n
+        n ++
+      }else{
+        power = 0
+      }
+    }
+  }
+  console.log(n);
+</script>
+
 
 
 
