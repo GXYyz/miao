@@ -1235,6 +1235,74 @@
   console.log(result.trim());
 </script>
 
+<script id="lcf&lcm">
+  let x = +prompt('X')
+  let y = +prompt('Y')
+  
+  let biggerNum = x > y ? x : y
+  let maxFactor = 0
+
+  for (let i = 1; i <= biggerNum ; i++) {
+    if(x % i == 0 && y % i == 0)
+    maxFactor = i > maxFactor ? i : maxFactor
+  }
+  let minMultiple = x * y / maxFactor
+  console.log(maxFactor,minMultiple);
+</script>
+
+<script id="sqrt">
+  let n = +prompt('N')
+  let sqrt = 0
+
+  for (let i = 1; ; i++) {
+    if(i ** 2 == n) {
+      console.log(i.toFixed(3))
+      break
+    }else if(i ** 2 > n){
+      sqrt = i - 1
+      for(let j = sqrt; ; j += .1){
+        if(i ** 2 == n) {
+          console.log(j.toFixed(3))
+          break
+        }else if(j ** 2 > n){
+          sqrt = j - .1
+          for (let k = sqrt; ; k += .01) {
+            if(k ** 2 == n) {
+              console.log(k.toFixed(3));
+              break
+            }else if(k ** 2 > n){
+              sqrt = k - .01
+              for (let l = sqrt; ; l += .001) {
+                if(l ** 2 == n) {
+                  console.log(l.toFixed(3));
+                  break
+                }else if(l ** 2 > n){
+                  sqrt = l - .001
+                  for (let m = sqrt; ; m += .0001) {
+                    if(m ** 2 == n) {
+                      console.log(m.toFixed(3));
+                      break
+                    }else if(m ** 2 > n){
+                      sqrt = m - .0001
+                      console.log(sqrt.toFixed(3));
+                      break
+                    }
+                  }
+                  break
+                }
+              }
+              break
+            }
+          }
+          break
+        }
+      }
+      break
+    }
+  }
+  
+</script>
+
 
 
 
