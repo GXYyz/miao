@@ -1174,6 +1174,54 @@
   }
 </script>
 
+<script id="complete-number">
+  let n = +prompt('n')
+  let arr = []
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= n; j++) {
+      if(i * j == n){
+        arr.push(i)
+        arr.push(j)
+      }
+    }
+  }
+  let newArr = []
+  arr.forEach(item => {
+    if(newArr.indexOf(item) === -1 && item != n) newArr.push(item)
+  });
+
+  if (n == 1 || n == 0) {
+    console.log('NO');
+  }else{
+    let sum = newArr.reduce((total,num) => total + num)
+    console.log(sum == n ? 'YES' : 'NO');
+  }
+</script>
+
+<script id="complete-numbers">
+  let resultArr = []
+  for(let i = 2; i <= 1000; i ++){
+    let arr = []
+    for (let j = 1; j <= i; j++) {
+      for (let k = 1; k <= i; k++) {
+        if(j * k == i){
+          arr.push(j)
+          arr.push(k)
+        }
+      }
+    }
+
+    let newArr = []
+    arr.forEach(item => {
+      if(newArr.indexOf(item) === -1 && item != i) newArr.push(item)
+    });
+    let sum = newArr.reduce((total,num) => total + num)
+
+    if (sum == i) resultArr.push(i)
+  }
+  console.log(resultArr.join(' '));
+</script>
+
 <script id="prime">
   let i = +prompt('N')
   console.log(i >= 8 ? ((i % 2 == 0 || i % 3 == 0 || i % 5 == 0 || i % 7 == 0) ? 'NO' : 'YES' ) : ((i == 1 || i == 4 || i == 6) ? 'NO' : 'YES'));
