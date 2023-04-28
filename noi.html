@@ -1069,6 +1069,111 @@
   console.log(sum);
 </script>
 
+<script id="narcissistic">
+  let n = +prompt('N')
+
+  let g = n % 10
+  let s = (Math.trunc(n / 10)) % 10
+  let b = Math.trunc(n / 100)
+
+ console.log(g ** 3 + s ** 3 + b ** 3 == n ? 'YES' : 'NO');
+</script>
+
+<script id="narcissistics">
+  let narcissisticString = ''
+
+  for (let i = 100; i < 1000; i++) {
+    let g = i % 10
+    let s = (Math.trunc(i / 10)) % 10
+    let b = Math.trunc(i / 100)
+
+    if (g ** 3 + s ** 3 + b ** 3 == i) narcissisticString += i + ' '
+  }
+  console.log(narcissisticString.trim());
+</script>
+
+<script id="palindrom">
+  let n = +prompt('N')
+  let num = n
+  let arr = []
+  while(true){
+      if (num == 0) {
+        break
+      }else {
+        arr.push(num % 10)
+      }
+      num = Math.trunc(num / 10)
+  }
+  let length = arr.length
+  let content = 0
+  if(arr.length % 2 == 0){
+    for(let i = 0; i < (length / 2); i ++){
+      if(arr[i] != arr[length - i - 1]) {
+        break
+      }else{
+        content = 1
+      }
+    }
+  }else{
+    for(let i = 0; i < ((length - 1) / 2); i ++){
+      if(arr[i] != arr[length - i - 1]) {
+        break
+      }else{
+        content = 1
+      }
+    }
+  }
+  console.log(content ? 'YES' : 'NO')
+</script>
+
+<script id="weekday">
+  let y = +prompt('Year')
+  let m = +prompt('Month')
+  let arrMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
+  let arrMonthR = [31,29,31,30,31,30,31,31,30,31,30,31]
+  let yearSum = 0
+  let monthSum = 0
+  if(y < 2023){
+    for (let i = y; i < 2023; i++) {
+      i % 400 == 0 ? yearSum += 366 : i % 100 % 4 == 0 ? yearSum += 366 : yearSum += 365
+    }
+    if (y % 400 == 0 ? 0 : y % 100 % 4 == 0 ? 0 : 1) {
+      for (let i = 0; i < (m - 1); i++) {
+        monthSum += arrMonth[i]
+      }
+    }else{
+      for (let i = 0; i < (m - 1); i++) {
+        monthSum += arrMonthR[i]
+      }
+    }
+    let daysX = yearSum - monthSum
+    console.log(7 - daysX % 7)
+  }else if(y > 2023){
+    for (let i = 2023; i <= y; i++) {
+      i % 400 == 0 ? yearSum += 366 : i % 100 % 4 == 0 ? yearSum += 366 : yearSum += 365
+    }
+    if (y % 400 == 0 ? 0 : y % 100 % 4 == 0 ? 0 : 1) {
+      for (let i = 0; i < (m - 1); i++) {
+        monthSum += arrMonth[i]
+      }
+    }else{
+      for (let i = 0; i < (m - 1); i++) {
+        monthSum += arrMonthR[i]
+      }
+    }
+
+    let daysX = yearSum + monthSum
+    console.log(daysX % 7)
+  }else{
+      for (let i = 0; i < (m - 1); i++) {
+        monthSum += arrMonthR[i]
+      }
+
+    let daysX = monthSum
+    console.log(daysX % 7)
+  }
+</script>
+
 
 
 
