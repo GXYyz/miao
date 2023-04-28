@@ -1174,6 +1174,19 @@
   }
 </script>
 
+<script id="prime">
+  let i = +prompt('N')
+  console.log(i >= 8 ? ((i % 2 == 0 || i % 3 == 0 || i % 5 == 0 || i % 7 == 0) ? 'NO' : 'YES' ) : ((i == 1 || i == 4 || i == 6) ? 'NO' : 'YES'));
+</script>
+
+<script id="primes">
+  let result = ''
+  for (let i = 1; i <= 100; i++) {
+    if(i >= 8 ? ((i % 2 == 0 || i % 3 == 0 || i % 5 == 0 || i % 7 == 0) ? 0 : 1 ) : ((i == 1 || i == 4 || i == 6) ? 0 : 1)) result += i + ' '
+  }
+  console.log(result.trim());
+</script>
+
 
 
 
