@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="1200" height="650"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated' //放大时的插帧方式：不插帧，直接放大像素
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = Math.trunc(x)
+    y = Math.trunc(y)
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+  /**
+   * 你的任务：通过调用dot函数，实现：
+   * 需要注意，dot函数不能接收浮点数，如果参数为浮点数，会被转换为整数后绘制
+      *1 在 坐标 (42, 42) 画出一个点
+      *2 画一条水平实线，粗细为一个像素
+      *3 画一条水平实线，粗细为一个像素
+      *4 画一条一个实点一个空点的虚线
+      *5 画一条两个实点两个空点的虚线
+      *6 画一条三个实点两个空点的虚线
+      *7 画一条45度的斜线
+      *8 画一条30度的斜线（与x轴或y轴的夹角呈30度）
+      *9 画一条跨越画布左上角和右下角的对角线
+      * 画一个空心矩形
+      * 画一个实心矩形
+      * 画两个空心的圆，圆心在画布中心：
+        * 一个半径为50像素
+        * 一个半径为200像素
+      * 画一个实心的圆，半径至少为100像素
+      * 画一个【大小位置都合适】的sin(x)的图像
+      * 画出rgb色彩空间的某一面（尺寸要大于100x100）
+      * 如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变换后的色彩空间某一面
+        可以考虑如下几种矩阵：
+           2 0
+           0 2
+           ------
+           1  0.27
+           0  1
+           ------
+           0.5    0.87
+           -0.87  0.5
+   */
+</script>
+<script>
+  // 不可更改上面的代码
+  // 你的代码写在这里
+
+  var a = 42, b = 42
+  console.log(dot(a, b, 'blue'))
+
+  var b1 = 5, b2 = 10, b3 = 15
+  for (var a = 0; a <= 300; a++) {
+    console.log(dot(a, b1, 'blue'))
+    console.log(dot(a, b2, 'red'))
+    if (a % 2 == 0) {
+      console.log(dot(a, b3, 'red'))
+    }
+  }
+
+
+
+  var b = 20
+  for (var a = 0, a1 = 1; a <= 300, a1 < 300; a += 4, a1 += 4) {
+    console.log(dot(a, b, 'purple'))
+    console.log(dot(a1, b, 'purple'))
+  }
+
+
+  var b = 30
+  for (var a = 0, a1 = 1, a2 = 2; a <= 300, a1 < 300, a2 < 300; a += 5, a1 += 5, a2 += 5) {
+    console.log(dot(a, b, 'purple'))
+    console.log(dot(a1, b, 'purple'))
+    console.log(dot(a2, b, 'purple'))
+  }
+
+
+
+
+  var y = 0, y1 = 0, y2 = 0
+  for (var x = 0; x <= 100; x++) {
+    // 45度
+    y = x
+    console.log(dot(x, y, 'black'))
+    // 30度
+    y1 = 1 / 2 * x
+    console.log(dot(x, y1, 'rgb(255,44,44)'))
+    // 60度
+    y2 = Math.sqrt(3) * x
+    console.log(dot(x, y2, 'rbg(233,55,11)'))
+
+  }
+
+
+  var y3 = 0
+  for (var x = 0; x <= 1200; x++) {
+    // 对角线
+    y3 = 13 / 24 * x
+    console.log(dot(x, y3, 'rgb(255,144,144)'))
+  }
+
+
+
+
+
+  var x1 = 200, x2 = 250
+  for (i = 200; i <= 250; i++) {
+    // 正方形四条边
+    console.log(dot(x1, i, 'rgb(222,144,144)'))
+    console.log(dot(x2, i, 'rgb(222,144,144)'))
+    console.log(dot(i, x1, 'rgb(222,144,144)'))
+    console.log(dot(i, x2, 'rgb(222,144,144)'))
+    for (var j = 300; j <= 350; j++) {
+      // 实体正方形
+      console.log(dot(i, j, 'rbg(100,100,100)'))
+    }
+  }
+
+
+
+
+
+  var y = 0, x = 0, r = 50
+  for (var x = -50; x <= r; x++) {
+    y = Math.sqrt(r ** 2 - x ** 2)
+    console.log(dot(x + 100, y + 250, 'rbg(100,100,100)'))
+    console.log(dot(-x + 100, -y + 250, 'rbg(100,100,100)'))
+  }
+
+
+  var y = 0, r = 200
+  for (var x = -200; x <= r; x++) {
+    y = Math.sqrt(r ** 2 - x ** 2)
+    console.log(dot(x + 250, y + 250, 'rbg(100,100,100)'))
+    console.log(dot(-x + 250, -y + 250, 'rbg(100,100,100)'))
+  }
+
+
+
+  var y = 0, x = 0, r = 100
+  for (var x = -100; x <= r; x++) {
+    for (var y = -100; y <= r; y++)
+      if (y ** 2 <= r ** 2 - x ** 2) {
+        console.log(dot(x + 600, y + 300, 'rbg(100,100,100)'))
+      }
+  }
+
+
+
+
+  var x = 0, y = 0
+  for (x = 0; x <= 40; x += 0.3) {
+    y = Math.sin(x)
+    console.log(dot(x * 10 - 10, (y * 10) + 400, 'rgb(66,66,111)'))
+  }
+
+
+
+
+  var a = 2, b = 0, g = 0, h = 2, c = 0, e = 0, d = 0,
+    a1 = 1, b1 = 0.27, g1 = 0.27, h1 = 1, e1 = 0, d1 = 0,
+    a2 = 0.5, b2 = 0.87, g2 = -0.87, h2 = 0.5, e2 = 0, d2 = 0,
+    xx = 500, yy = 700
+  for (x = 1; x <= 127; x++) {
+    for (y = 1; y <= 127; y++) {
+      c = '' + ' rgb(' + 2 * x + "," + 255 + "," + 2 * y + ')'
+      c1 = '' + ' rgb(' + 255 + "," + 2 * x + "," + 2 * y + ')'
+      c2 = '' + ' rgb(' + 2 * x + "," + 2 * y + "," + 255 + ')'
+
+      d = a * x + b * y
+      e = g * x + h * y
+      d1 = a1 * x + b1 * y
+      e1 = g1 * x + h1 * y
+      d2 = a2 * x + b2 * y
+      e2 = g2 * x + h2 * y
+      // 旋转
+      console.log(dot(d2, e2 + xx, c2))
+      console.log(dot(d1 + xx, e1, c1))
+      // 放大
+      console.log(dot(d + yy, e, c))
+      // 正
+      console.log(dot(x + yy, y, c))
+    }
+  }
+
+
+
+
+
+
+
+</script>
+
+</html>
