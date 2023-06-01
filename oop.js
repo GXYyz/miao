@@ -259,104 +259,124 @@ class PriorityQueue {
     if (typeof predicate !== 'function') {
       throw new TypeError('predicate must be a function, got: ' + predicate)
     }
-    this._elements = []
+
+    this.heap = []
     this._predicate = predicate
 
-    for (var item of initials) {
+    for (let item of initials) {
       this.push(item)
     }
   }
+
+  push(val) {
+    this.heap.push(val)
+    this._heapUp(this.heap.length - 1)
+    return this.heap
+  }
+  pop() {
+    if (this.heap.length === 0) return undefined
+    if (this.heap.length === 1) return this.heap.pop()
+
+    let result = this.heap[0]
+    let item = this.heap.pop()
+    this.heap[0] = item
+    this._heapDown(0)
+
+    return result
+  }
+  // 查看堆顶元素
+  peek() {
+    return this.heap[0]
+  }
+  get size() {
+    return this.heap.length
+  }
+
   _swap(i, j) {
-    var t = this._elements[i]
-    this._elements[i] = this._elements[j]
-    this._elements[j] = t
+    let p = this.heap[i]
+    this.heap[i] = this.heap[j]
+    this.heap[j] = p
+  }
+  _heapDown(pos) {
+    // let predicate = this._predicate
+    let predicate = (it) => it
+    let position = pos
+    let leftPos = pos * 2 + 1
+    let rightPos = pos * 2 + 2
+
+    if (leftPos < this.heap.length && predicate(this.heap[position]) < predicate(this.heap[leftPos])) {
+      position = leftPos
+    }
+    if (rightPos < this.heap.length && predicate(this.heap[position]) < predicate(this.heap[rightPos])) {
+      position = rightPos
+    }
+
+    if (position !== pos) {
+      this._swap(pos, position)
+      this._heapDown(position)
+    }
   }
   _heapUp(pos) {
-    if (pos == 0) {
-      return
-    }
-    var predicate = this._predicate
-    var parentPos = (pos - 1) >> 1 // 计算pos位置的元素的父结点的位置
-    if (predicate(this._elements[pos]) > predicate(this._elements[parentPos])) {
+    if (pos === 0) return
+    let predicate = this._predicate
+    let parentPos = (pos - 1) >> 1
+    if (predicate(this.heap[pos]) > predicate(this.heap[parentPos])) {
       this._swap(pos, parentPos)
       this._heapUp(parentPos)
     }
   }
-  _heapDown(pos) {
-    var leftPos = 2 * pos + 1
-    var rightPos = 2 * pos + 2
-    var maxIdx = pos
-    var predicate = this._predicate
-    if (leftPos < this._elements.length && predicate(this._elements[leftPos]) > predicate(this._elements[maxIdx])) {
-      maxIdx = leftPos
-    }
-    if (rightPos < this._elements.length && predicate(this._elements[rightPos]) > predicate(this._elements[maxIdx])) {
-      maxIdx = rightPos
-    }
-    if (maxIdx !== pos) {
-      this._swap(maxIdx, pos)
-      this._heapDown(maxIdx)
+
+  static heapDown(heap, pos, stop = heap.length) {
+    while (true) {
+      let position = pos
+      let leftPos = position * 2 + 1
+      let rightPos = position * 2 + 2
+      if (leftPos < stop && heap[position] < heap[leftPos]) {
+        position = leftPos
+      }
+      if (rightPos < stop && heap[position] < heap[rightPos]) {
+        position = rightPos
+      }
+      if (position !== pos) {
+        let p = heap[position]
+        heap[position] = heap[pos]
+        heap[pos] = p
+        pos = position
+      } else break
     }
   }
-  push(val) {
-    this._elements.push(val)
-    this._heapUp(this._elements.length - 1)
-    return this
-  }
-  pop() {
-    if (this._elements.length == 0) {
-      return undefined
+  // 堆排序
+  static heapSort(array) {
+    let heap = new PriorityQueue()
+    for (let item of array) {
+      heap.push(item)
     }
-    if (this._elements.length == 1) {
-      return this._elements.pop()
+    let result = []
+    while (heap.size > 0) {
+      result.push(heap.pop())
     }
-    var result = this._elements[0]
-    var last = this._elements.pop()
-    this._elements[0] = last
-    this._heapDown(0)
     return result
   }
-  // 查看堆顶元素但不将它从堆中删除
-  peek() {
-    return this._elements[0]
+  // 乱序数组堆化
+  static heapify(array) {
+    let heapDown = PriorityQueue.heapDown
+    let start = (array.length - 1) >> 1
+    for (let i = start; i >= 0; i--) {
+      heapDown(array, i)
+    }
+    return array
   }
-  get size() {
-    return this._elements.length
-  }
-}
+  // 就地数组堆排序
+  static heapSortLoc(array) {
+    PriorityQueue.heapify(array)
 
-function heapSort2(array) {
-  var pq = new PriorityQueue()
-  for (var item of array) {
-    pq.push(item)
+    let heapDown = PriorityQueue.heapDown
+    for (let i = array.length - 1; i > 0; i--) {
+      let p = array[i]
+      array[i] = array[0]
+      array[0] = p
+      heapDown(array, 0, i)
+    }
+    return array
   }
-  var result = []
-  while (pq.size > 0) {
-    result.push(pq.pop())
-  }
-  return result
-}
-
-function heapify(ary) {
-  var start = (ary.length - 1) >> 1
-  for (var i = start; i >= 0; i--) {
-    heapDown2(ary, i)
-  }
-  return ary
-}
-
-/**
- *
- * 时间复杂度：O(n * log(n))
- * 空间复杂度：O(1)
- */
-function heapSort(ary) {
-  // 将数组就地堆化
-  heapify(ary)
-
-  for (var i = ary.length - 1; i > 0; i--) {
-    swap(ary, i, 0)
-    heapDown2(ary, 0, i)
-  }
-  return ary
 }
