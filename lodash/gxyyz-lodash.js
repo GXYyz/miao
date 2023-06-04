@@ -112,7 +112,7 @@ var gxyyz = {
     return arr
   },
   dropRight: (arr, n = 1) => {
-    arr.splice(-1, n)
+    arr.splice(-n, n)
     return arr
   },
   dropRightWhile: function (arr, predicate = (val) => val) {
