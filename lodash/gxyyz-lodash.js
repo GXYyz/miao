@@ -22,36 +22,40 @@ var gxyyz = {
     let result = arr
     for (let item of args) {
       if (Array.isArray(item)) {
-        result.concat(item)
+        result.push(...item)
       } else {
         result.push(item)
       }
     }
     return result
   },
-  difference: (arr, values) => {
-    let help = new Set(values)
+  difference: (arr, ...args) => {
+    let help = new Set(args.flat())
     return arr.filter((item) => !help.has(item))
   },
-  differenceBy: (arr, values, iteratee = (val) => val) => {
-    if (typeof predicate === 'string') {
-      let help = new Set(
-        values.map((item) => {
-          item[predicate]
-        })
-      )
-      return arr.filter((item) => !help.has(item[predicate]))
+  differenceBy: function (arr, ...args) {
+    if (!Array.isArray(this.last(args))) {
+      let iteratee = args.pop()
+      let values = args.flat()
+      if (typeof iteratee === 'string') {
+        let help = new Set(values.map((item) => item[iteratee]))
+        return arr.filter((item) => !help.has(item[iteratee]))
+      }
+      let help = new Set(values.map(iteratee))
+      return arr.filter((item) => !help.has(iteratee(item)))
+    } else {
+      return this.difference(arr, ...args)
     }
-    let help = new Set(values.map(iteratee))
-    return arr.filter((item) => !help.has(iteratee(item)))
   },
   fill: (arr, val, start = 0, end = arr.length) => {
     for (let i = start; i < end; i++) {
       arr.splice(i, 1, val)
     }
+    return arr
   },
   drop: (arr, n = 1) => {
     arr.splice(0, n)
+    return arr
   },
   findIndex: (arr, predicate = (val) => val, fromIndex = 0) => {
     if (Array.isArray(predicate)) {
@@ -110,7 +114,7 @@ var gxyyz = {
   flatten: (arr) => arr.flat(),
   flattenDeep: function (arr) {
     let result = []
-    arr.reduce((item) => {
+    arr.forEach((item) => {
       result.push(...(Array.isArray(item) ? this.flattenDeep(item) : [item]))
     })
     return result
@@ -178,10 +182,8 @@ var gxyyz = {
     }
     return state
   },
-  some: (arr, foo = (it) => it) => {
-    for (let item of arr) {
-      if (foo(item)) return true
-    }
-    return false
+  some: function (arr, foo = (it) => it) {
+    if (this.findIndex(arr, foo) === -1) return false
+    return true
   }
 }
