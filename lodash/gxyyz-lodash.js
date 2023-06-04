@@ -1,4 +1,42 @@
 var gxyyz = {
+  baseIteratee: (value) => {
+    if (typeof value === 'function') {
+      return value
+    }
+    if (typeof value === 'object') {
+      if (Array.isArray(value)) {
+        let key = value[0]
+        let val = value[1]
+        return (obj) => {
+          if (typeof obj !== 'object') throw 'formal parameter must be object'
+          let state = false
+          for (let item in obj) {
+            if (item === key && obj[item] === val) state = true
+          }
+          return state
+        }
+      } else {
+        return (obj) => {
+          if (typeof obj !== 'object') throw 'formal parameter must be object'
+          let state = true
+          for (let [key, val] of Object.entries(value)) {
+            if (obj[key] !== val) {
+              state = false
+              break
+            }
+          }
+          return state
+        }
+      }
+    }
+    if (typeof value === 'string') {
+      return (obj) => {
+        let set = Object.keys(obj)
+        if (set.has(value)) return true
+        return false
+      }
+    }
+  },
   chunk: (arr, length) => {
     let result = []
     for (let i = 0; i < arr.length; i += length) {
@@ -47,6 +85,22 @@ var gxyyz = {
       return this.difference(arr, ...args)
     }
   },
+  differenceWith: function (arr, ...args) {
+    if (!Array.isArray(this.last(args))) {
+      let comparator = args.pop()
+      let result = []
+      for (let item of arr) {
+        let needPush = true
+        for (let arg of args) {
+          if (comparator(item, arg)) needPush = false
+        }
+        if (needPush) result.push(item)
+      }
+      return result
+    } else {
+      return this.difference(arr, ...args)
+    }
+  },
   fill: (arr, val, start = 0, end = arr.length) => {
     for (let i = start; i < end; i++) {
       arr.splice(i, 1, val)
@@ -57,57 +111,33 @@ var gxyyz = {
     arr.splice(0, n)
     return arr
   },
-  findIndex: (arr, predicate = (val) => val, fromIndex = 0) => {
-    if (Array.isArray(predicate)) {
-      for (let i = fromIndex; i < arr.length; i++) {
-        if (arr[i][predicate[0]] === predicate[1]) return i
-      }
-    } else if (typeof predicate === 'object') {
-      for (let i = fromIndex; i < arr.length; i++) {
-        let state = true
-        for (let [key, val] of Object.entries(predicate)) {
-          if (arr[i][key] !== val) {
-            state = false
-            break
-          }
-        }
-        if (state) return i
-      }
-    } else if (typeof predicate === 'string') {
-      for (let i = fromIndex; i < arr.length; i++) {
-        if (arr[i][predicate]) return i
-      }
-    } else {
-      for (let i = fromIndex; i < arr.length; i++) {
-        if (predicate(arr[i])) return i
-      }
+  dropRight: (arr, n = 1) => {
+    arr.splice(-1, n)
+    return arr
+  },
+  dropRightWhile: function (arr, predicate = (val) => val) {
+    let count = 0
+    while (arr.length > count) {
+      if (!this.baseIteratee(predicate)(arr[count])) break
+      count++
+    }
+    arr.splice(count)
+    return arr
+  },
+  dropWhile: function (arr, predicate = (val) => val) {
+    let booleanMap = arr.map((item) => this.baseIteratee(predicate)(item))
+    let count = this.findIndex(booleanMap, (val) => !val)
+    return this.drop(arr, count)
+  },
+  findIndex: function (arr, predicate = (val) => val, fromIndex = 0) {
+    for (let i = fromIndex; i < arr.length; i++) {
+      if (this.baseIteratee(predicate)(arr[i])) return i
     }
     return -1
   },
-  findLastIndex: (arr, predicate = (val) => val, fromIndex = arr.length - 1) => {
-    if (Array.isArray(predicate)) {
-      for (let i = fromIndex; i >= 0; i--) {
-        if (arr[i][predicate[0]] === predicate[1]) return i
-      }
-    } else if (typeof predicate === 'object') {
-      for (let i = fromIndex; i >= 0; i--) {
-        let state = true
-        for (let [key, val] of Object.entries(predicate)) {
-          if (arr[i][key] !== val) {
-            state = false
-            break
-          }
-        }
-        if (state) return i
-      }
-    } else if (typeof predicate === 'string') {
-      for (let i = fromIndex; i >= 0; i--) {
-        if (arr[i][predicate]) return i
-      }
-    } else {
-      for (let i = fromIndex; i >= 0; i--) {
-        if (predicate(arr[i])) return i
-      }
+  findLastIndex: function (arr, predicate = (val) => val, fromIndex = arr.length - 1) {
+    for (let i = fromIndex; i >= 0; i--) {
+      if (this.baseIteratee(predicate)(arr[i])) return i
     }
     return -1
   },
@@ -175,15 +205,23 @@ var gxyyz = {
     }
     return arr
   },
-  every: (arr, foo = (it) => it) => {
+  every: function (arr, foo = (it) => it) {
     let state = true
     for (let item of arr) {
-      if (!foo(item)) state = false
+      if (!this.baseIteratee(foo)(item)) state = false
     }
     return state
   },
   some: function (arr, foo = (it) => it) {
     if (this.findIndex(arr, foo) === -1) return false
     return true
+  },
+  intersection: function (...args) {
+    let result = args[0]
+    for (let i = 1; i < args.length; i++) {
+      let set = new Set(args[i])
+      result = result.filter((item) => set.has(item))
+    }
+    return result
   }
 }
