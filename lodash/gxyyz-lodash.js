@@ -31,8 +31,9 @@ var gxyyz = {
     }
     if (typeof value === 'string') {
       return (obj) => {
-        let set = new Set(Object.keys(obj))
-        if (set.has(value)) return true
+        // let set = new Set(Object.keys(obj))
+        // if (set.has(value)) return true
+        if (obj[value]) return true
         return false
       }
     }
@@ -89,7 +90,7 @@ var gxyyz = {
     if (!Array.isArray(this.last(args))) {
       let comparator = args.pop()
       args = args.flat()
-      return arr.filter((item) => !args.forEach((arg) => comparator(item, arg)))
+      return arr.filter((item) => args.reduce((state, arg) => state || comparator(item, arg)), false)
     } else {
       return this.difference(arr, ...args)
     }
@@ -109,12 +110,12 @@ var gxyyz = {
     return arr
   },
   dropRightWhile: function (arr, predicate = (val) => val) {
-    let count = 0
-    while (arr.length > count) {
+    let count = arr.length - 1
+    while (count >= 0) {
       if (!this.baseIteratee(predicate)(arr[count])) break
-      count++
+      count--
     }
-    arr.splice(count)
+    arr.splice(count + 1)
     return arr
   },
   dropWhile: function (arr, predicate = (val) => val) {
