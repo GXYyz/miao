@@ -76,12 +76,8 @@ var gxyyz = {
     if (!Array.isArray(this.last(args))) {
       let iteratee = args.pop()
       let values = args.flat()
-      if (typeof iteratee === 'string') {
-        let help = new Set(values.map((item) => item[iteratee]))
-        return arr.filter((item) => !help.has(item[iteratee]))
-      }
-      let help = new Set(values.map(iteratee))
-      return arr.filter((item) => !help.has(iteratee(item)))
+      let help = new Set(values.map((item) => this.baseIteratee(iteratee, 'beKey')(item)))
+      return arr.filter((item) => !help.has(this.baseIteratee(iteratee, 'beKey')(item)))
     } else {
       return this.difference(arr, ...args)
     }
@@ -217,5 +213,20 @@ var gxyyz = {
       result = result.filter((item) => set.has(item))
     }
     return result
-  }
+  },
+  intersectionBy: function (...args) {
+    let iteratee = args.pop()
+    let result = args[0]
+    for (let i = 1; i < args.length; i++) {
+      let set = new Set(args[i].map((item) => this.baseIteratee(iteratee, 'beKey')(item)))
+      result = result.filter((item) => set.has(this.baseIteratee(iteratee, 'beKey')(item)))
+    }
+    return result
+  },
+  intersectionWith: (...args) => {
+    let iteratee = args.pop()
+    let compare = args.pop()
+    return args.map((item) => item.filter((item1) => compare.reduce((state, item2) => state || iteratee(item1, item2), false)))
+  },
+  nth: (arr, n = 0) => (n < 0 ? arr[arr.length + n] : arr[n])
 }
