@@ -1,5 +1,6 @@
 var gxyyz = {
-  baseIteratee: (value) => {
+  // base function
+  baseIteratee: (value, returnType = 'boolean') => {
     if (typeof value === 'function') {
       return value
     }
@@ -30,14 +31,33 @@ var gxyyz = {
       }
     }
     if (typeof value === 'string') {
-      return (obj) => {
-        // let set = new Set(Object.keys(obj))
-        // if (set.has(value)) return true
-        if (obj[value]) return true
-        return false
+      if (returnType === 'boolean') {
+        return (obj) => {
+          if (obj[value]) return true
+          return false
+        }
+      } else if (returnType === 'beKey') {
+        return (obj) => obj[value]
+      } else if (returnType === 'run') {
+        return (obj) => eval(`'${obj}'.${value}`)
       }
     }
   },
+  baseObjectPush: (obj, key, val, type = 'val') => {
+    if (type === 'array') {
+      if (!obj[key]) {
+        obj[key] = [val]
+      } else obj[key].push(val)
+    } else if (type === 'count') {
+      if (!obj[key]) {
+        obj[key] = 1
+      } else obj[key]++
+    } else {
+      obj[key] = val
+    }
+  },
+  // base function
+
   chunk: (arr, length) => {
     let result = []
     for (let i = 0; i < arr.length; i += length) {
@@ -83,13 +103,9 @@ var gxyyz = {
     }
   },
   differenceWith: function (arr, ...args) {
-    if (!Array.isArray(this.last(args))) {
-      let comparator = args.pop()
-      args = args.flat()
-      return arr.filter((item) => args.reduce((state, arg) => state || comparator(item, arg)), false)
-    } else {
-      return this.difference(arr, ...args)
-    }
+    let comparator = args.pop()
+    args = args.flat()
+    return arr.filter((item) => args.reduce((state, arg) => state || comparator(item, arg)), false)
   },
   fill: (arr, val, start = 0, end = arr.length) => {
     for (let i = start; i < end; i++) {
@@ -246,7 +262,64 @@ var gxyyz = {
   intersectionWith: (...args) => {
     let iteratee = args.pop()
     let compare = args.pop()
-    return args.map((item) => item.filter((item1) => compare.reduce((state, item2) => state || iteratee(item1, item2), false)))
+    return this.flatten(args.map((item) => item.filter((item1) => compare.reduce((state, item2) => state || iteratee(item1, item2), false))))
   },
-  nth: (arr, n = 0) => (n < 0 ? arr[arr.length + n] : arr[n])
+  nth: (arr, n = 0) => (n < 0 ? arr[arr.length + n] : arr[n]),
+  countBy: function (...args) {
+    let iteratee = args.pop()
+    let result = {}
+    args.flat().forEach((item) => {
+      this.baseObjectPush(result, this.baseIteratee(iteratee, 'run')(item))
+    })
+    return result
+  },
+  groupBy: function (...args) {
+    let iteratee = args.pop()
+    let result = {}
+    args.flat().forEach((item) => {
+      this.baseObjectPush(result, this.baseIteratee(iteratee, 'run')(item), item, 'array')
+    })
+    return result
+  },
+  keyBy: function (collection, iteratee) {
+    let result = {}
+    for (let item in collection) {
+      this.baseObjectPush(result, this.baseIteratee(iteratee, 'beKey')(collection[item]), Array.isArray(collection) ? collection[item] : { item: collection[item] })
+    }
+    return result
+  },
+  forEach: function (collection, iteratee = (val) => val) {
+    for (let item in collection) {
+      iteratee(collection[item], item, collection)
+    }
+  },
+  map: function (collection, iteratee = (val) => val) {
+    let result = []
+    for (let item in collection) {
+      result.push(this.baseIteratee(iteratee, 'beKey')(collection[item]))
+    }
+    return result
+  },
+  filter: function (collection, predicate = (val) => val) {
+    let result = []
+    for (let item in collection) {
+      if (this.baseIteratee(predicate)(collection[item])) result.push(collection[item])
+    }
+    return result
+  },
+  reduce: function (collection, iteratee = (val) => val, accumulator) {
+    let initialVal = accumulator === undefined ? this.head(Object.values(collection)) : accumulator
+    for (let item in collection) {
+      initialVal = iteratee(initialVal, collection[item], item)
+    }
+    return initialVal
+  },
+  reduceRight: function (collection, iteratee = (val) => val, accumulator) {
+    let initialVal = accumulator === undefined ? this.last(Object.values(collection)) : accumulator
+    let keys = this.reverse(Object.keys(collection))
+    this.forEach(keys, (item) => {
+      initialVal = iteratee(initialVal, collection[item], item)
+    })
+    return initialVal
+  }
 }
