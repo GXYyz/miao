@@ -186,6 +186,26 @@ var gxyyz = {
     }
     return arr
   },
+  pullAll: (arr, vals) => gxyyz.pull(arr, ...vals),
+  pullAllBy: function (arr, vals, iteratee) {
+    let set = new Set(vals.map((item) => this.baseIteratee(iteratee, 'beKey')(item)))
+    for (let i = 0; i < arr.length; i++) {
+      if (set.has(this.baseIteratee(iteratee, 'beKey')(arr[i]))) {
+        arr.splice(i, 1)
+        i--
+      }
+    }
+    return arr
+  },
+  pullAllWith: function (arr, vals, comparator) {
+    for (let i = 0; i < arr.length; i++) {
+      if (vals.reduce((state, item) => state || comparator(item, arr[i]), false)) {
+        arr.splice(i, 1)
+        i--
+      }
+    }
+    return arr
+  },
   reverse: (arr) => {
     let help = arr,
       len = help.length
