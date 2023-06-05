@@ -31,7 +31,7 @@ var gxyyz = {
     }
     if (typeof value === 'string') {
       return (obj) => {
-        let set = Object.keys(obj)
+        let set = new Set(Object.keys(obj))
         if (set.has(value)) return true
         return false
       }
@@ -88,15 +88,8 @@ var gxyyz = {
   differenceWith: function (arr, ...args) {
     if (!Array.isArray(this.last(args))) {
       let comparator = args.pop()
-      let result = []
-      for (let item of arr) {
-        let needPush = true
-        for (let arg of args) {
-          if (comparator(item, arg)) needPush = false
-        }
-        if (needPush) result.push(item)
-      }
-      return result
+      args = args.flat()
+      return arr.filter((item) => !args.forEach((arg) => comparator(item, arg)))
     } else {
       return this.difference(arr, ...args)
     }
