@@ -259,7 +259,7 @@ var gxyyz = {
     }
     return result
   },
-  intersectionWith: (...args) => {
+  intersectionWith: function (...args) {
     let iteratee = args.pop()
     let compare = args.pop()
     return this.flatten(args.map((item) => item.filter((item1) => compare.reduce((state, item2) => state || iteratee(item1, item2), false))))
@@ -269,7 +269,7 @@ var gxyyz = {
     let iteratee = args.pop()
     let result = {}
     args.flat().forEach((item) => {
-      this.baseObjectPush(result, this.baseIteratee(iteratee, 'run')(item))
+      this.baseObjectPush(result, this.baseIteratee(iteratee, 'run')(item), null, 'count')
     })
     return result
   },
