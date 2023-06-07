@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{font-family: consolas;}
+    #outputString b:nth-child(even){
+      background-color: rgb(159,207,255);
+    }
+    #outputString b:nth-child(odd){
+      background-color: rgb(213,235,255);
+    }
+    #output{
+      position: relative;
+    }
+    #outputString{
+      box-sizing: border-box;
+      position: absolute;
+      border: 2px solid;
+      padding: 0;
+      margin: 0;
+      width: 300px;
+      height: 200px;
+      font-size: 24px;
+      background-color: transparent;
+      word-break: break-all;
+      white-space: break-spaces;
+    }
+    #inputString{
+      box-sizing: border-box;
+      position: absolute;
+      border: 2px solid;
+      padding: 0;
+      margin: 0;
+      width: 300px;
+      height: 200px;
+      font-size: 24px;
+      background-color: transparent;
+      word-break: break-all;
+      white-space: break-spaces;
+    }
+  </style>
+</head>
+<body>
+  <div class="regex">
+    请输入正则表达式:<br/>
+    <input type="text" value="foo" id="inputRegex">
+    <button id="changeRegex">匹配</button>
+    <div>
+      <label><input type="checkbox" name="pattern" value="g" id="global" checked>g</label>
+      <label><input type="checkbox" name="pattern" value="i" id="ignoreCase">i</label>
+      <label><input type="checkbox" name="pattern" value="u" id="source">u</label>
+      <label><input type="checkbox" name="pattern" value="y" id="sticky">y</label>
+      <label><input type="checkbox" name="pattern" value="m" id="multiline">m</label>
+      <label><input type="checkbox" name="pattern" value="s" id="dotAll">s</label>
+    </div>
+  </div>
+  请输入要处理的字符串:<br/>
+  <div class="output">
+    <div id="outputString"></div>
+    <textarea id="inputString" cols="30" rows="10">foobhjbjfoodFooo</textarea>
+  </div>
+
+
+
+  <script>
+    let outputString = document.querySelector('#outputString')
+    let inputRegex = document.querySelector('#inputRegex')
+    let inputString = document.querySelector('#inputString')
+    let changeRegex = document.querySelector('#changeRegex')
+    changeRegex.addEventListener('click',() => {run()})
+    inputRegex.addEventListener('keyup',() => {run()})
+    inputString.addEventListener('keyup',() => {run()})
+    let patterns = ''
+    setTimeout(getPattern(),100)
+    run()
+
+    
+    function run() {
+      if(inputRegex.value === '') throw 'have no Regex'
+      // if(patterns === '') throw ''
+      let lastLastIndex = 0
+      let html = ''
+      let match
+      let re = new RegExp(inputRegex.value,patterns)
+      while(match = re.exec(inputString.value)){
+        let reset = inputString.value.slice(lastLastIndex,match.index)
+        html += `${reset}<b>${match[0]}</b>`
+        lastLastIndex = re.lastIndex
+      }
+      let reset = inputString.value.slice(lastLastIndex)
+      outputString.innerHTML = `${html}${reset}`
+    }
+    function getPattern () {
+      patterns = ''
+      let patternIpt = document.getElementsByName('pattern')
+      for(let item in patternIpt){
+        if(patternIpt[item].checked) patterns += patternIpt[item].value
+      }
+    }
+
+  </script>
+</body>
+</html>
