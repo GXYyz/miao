@@ -380,3 +380,115 @@ class PriorityQueue {
     return array
   }
 }
+
+RegExp.prototype.mytest = function (string) {
+  if (this.exec(string)) {
+    return true
+  } else {
+    return false
+  }
+}
+String.prototype.mysearch = function (re) {
+  if (typeof re === 'string') {
+    re = new RegExp(re)
+  }
+  let match
+  if ((match = re.exec(this))) {
+    return match.index
+  } else {
+    return -1
+  }
+}
+
+String.prototype.myreplace = function (re, replacement) {
+  if (typeof re === 'string') {
+    re = new RegExp(re)
+  }
+  re.lastIndex = 0
+  let result = ''
+  let match
+  let lastLastIndex = 0
+
+  while ((match = re.exec(this))) {
+    result += this.slice(lastLastIndex, match.index)
+    if (typeof replacement === 'function') {
+      result += replacement(...match, match.index, match.input)
+    } else {
+      replacement = replacement.myreplace(/\$([1-9\&])/, (_, idx) => {
+        if (idx === '&') {
+          return match[0]
+        } else {
+          return match[idx]
+        }
+      })
+      result += replacement
+    }
+    lastLastIndex = re.lastIndex
+    if (!re.global) {
+      lastLastIndex = match.index + match[0].length
+      break
+    }
+  }
+  result += this.slice(lastLastIndex)
+
+  return result
+}
+
+String.prototype.myreplaceAll = function (re, replacement) {
+  if (!re.global) {
+    throw new TypeError('String.prototype.myreplaceAll called with a non-global RegExp argument')
+  }
+  return this.myreplace(re, replacement)
+}
+
+String.prototype.mymatch = function (re) {
+  if (typeof re === 'string') {
+    re = new RegExp(re)
+  }
+  if (!re.global) return re.exec(this)
+  let result = []
+  let match
+  re.lastIndex = 0
+  while ((match = re.exec(this))) {
+    result.push(match[0])
+  }
+
+  return result
+}
+
+String.prototype.mymatchAll = function (re) {
+  if (typeof re === 'string') {
+    re = new RegExp(re, 'g')
+  }
+  if (!re.global) {
+    throw new TypeError('String.prototype.mymatchAll called with a non-global RegExp argument')
+  }
+
+  let result = []
+  let match
+  re.lastIndex = 0
+  while ((match = re.exec(this))) {
+    result.push(match)
+  }
+
+  return result
+}
+
+String.prototype.mysplit = function (re) {
+  if (typeof re === 'string') {
+    re = new RegExp(re, 'g')
+  }
+  if (!re.global) {
+    re = new RegExp(re.source, 'g' + re.flags)
+  }
+  re.lastIndex = 0
+  let result = []
+  let match
+  let lastLastIndex = 0
+  while ((match = re.exec(this))) {
+    result.push(this.slice(lastLastIndex, match.index), ...match.slice(1))
+    lastLastIndex = re.lastIndex
+  }
+  result.push(this.slice(lastLastIndex))
+  return result
+}
