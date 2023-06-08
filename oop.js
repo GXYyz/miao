@@ -414,7 +414,7 @@ String.prototype.myreplace = function (re, replacement) {
     if (typeof replacement === 'function') {
       result += replacement(...match, match.index, match.input)
     } else {
-      replacement = replacement.myreplace(/\$([1-9\&])/, (_, idx) => {
+      replacement = replacement.myreplace(/\$([1-9\&])/g, (_, idx) => {
         if (idx === '&') {
           return match[0]
         } else {
