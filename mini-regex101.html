@@ -71,17 +71,19 @@
     let inputRegex = document.querySelector('#inputRegex')
     let inputString = document.querySelector('#inputString')
     let changeRegex = document.querySelector('#changeRegex')
+    let patternIpt = document.getElementsByName('pattern')
+    let patterns = ''
     changeRegex.addEventListener('click',() => {run()})
     inputRegex.addEventListener('keyup',() => {run()})
     inputString.addEventListener('keyup',() => {run()})
-    let patterns = ''
-    setTimeout(getPattern(),100)
+    
+    getPattern()
     run()
+    patternClick()
 
     
     function run() {
-      if(inputRegex.value === '') throw 'have no Regex'
-      // if(patterns === '') throw ''
+      if(inputRegex.value === '') {outputString.innerHTML = '';return}
       let lastLastIndex = 0
       let html = ''
       let match
@@ -90,15 +92,27 @@
         let reset = inputString.value.slice(lastLastIndex,match.index)
         html += `${reset}<b>${match[0]}</b>`
         lastLastIndex = re.lastIndex
+        if(!re.global){
+          reset = inputString.value.slice(match[0].length)
+          outputString.innerHTML = `${html}${reset}`
+          return 
+        }
       }
       let reset = inputString.value.slice(lastLastIndex)
       outputString.innerHTML = `${html}${reset}`
     }
+    function patternClick() {
+      for(let item of patternIpt){
+        item.addEventListener ('click',() => {
+          getPattern()
+          run()
+        })
+      }
+    }
     function getPattern () {
       patterns = ''
-      let patternIpt = document.getElementsByName('pattern')
-      for(let item in patternIpt){
-        if(patternIpt[item].checked) patterns += patternIpt[item].value
+      for(let item of patternIpt){
+        if(item.checked) patterns += item.value
       }
     }
 
