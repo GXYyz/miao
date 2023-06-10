@@ -6,7 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    *{font-family: consolas;}
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: consolas;
+      font-style: normal;
+    }
+    body{
+      padding: 10px;
+    }
     #outputString b:nth-child(even){
       background-color: rgb(159,207,255);
     }
@@ -24,11 +33,33 @@
       margin: 0;
       width: 300px;
       height: 200px;
+      padding: 2px;
       font-size: 24px;
       background-color: transparent;
       word-break: break-all;
       white-space: break-spaces;
     }
+    #outputString i:hover:not(:has(:hover)){
+      box-shadow: inset 0 0 2px black;
+      position: relative;
+    }
+    #outputString i:hover:not(:has(:hover))::before{
+      content: attr(group-matchIdx) '\A-------\A' attr(group-message) '\A' attr(group-pos);
+      position: absolute;
+      bottom: 100%;
+      padding: 2px;
+      border-radius: 3px;
+      color: white;
+      background-color: rgba(0,0,0,.9);
+      font-weight: normal;
+      font-size: 15px;
+      white-space: pre;
+      z-index: 9;
+    }
+    #outputString i:hover:not(:has(:hover)) i {
+      background-color: transparent;
+    }
+
     #inputString{
       box-sizing: border-box;
       position: absolute;
@@ -37,17 +68,59 @@
       margin: 0;
       width: 300px;
       height: 200px;
+      padding: 2px;
       font-size: 24px;
       background-color: transparent;
       word-break: break-all;
       white-space: break-spaces;
+      /* 事件穿透 */
+      pointer-events: none;
+    }
+
+    #inputRegex{
+      outline: none;
+      border-style:solid;
+    }
+
+    .zero{
+      border: 1px dashed rgb(218,0,253);
+      margin-left: -1px;
+      margin-right: -1px;
+    }
+
+    i[group-date="1"]{
+      background-color: rgb(196,232,172);
+    }
+    i[group-date="2"]{
+      background-color: rgb(246,215,166);
+    }
+    i[group-date="3"]{
+      background-color: rgb(200,200,255);
+    }
+    i[group-date="4"]{
+      background-color: rgb(242,207,255);
+    }
+    i[group-date="5"]{
+      background-color: rgb(255,197,191);
+    }
+    i[group-date="6"]{
+      background-color: rgb(200,231,214);
+    }
+    i[group-date="7"]{
+      background-color: rgb(183,211,196);
+    }
+    i[group-date="8"]{
+      background-color: rgb(233,204,158);
+    }
+    i[group-date="9"]{
+      background-color: rgb(187,187,239);
     }
   </style>
 </head>
 <body>
   <div class="regex">
     请输入正则表达式:<br/>
-    <input type="text" value="foo" id="inputRegex">
+    <input type="text" value="(f(o))(o(o)(o))" id="inputRegex">
     <button id="changeRegex">匹配</button>
     <div>
       <label><input type="checkbox" name="pattern" value="g" id="global" checked>g</label>
@@ -60,8 +133,13 @@
   </div>
   请输入要处理的字符串:<br/>
   <div class="output">
+    <div style="font-size: 16px;">
+      <button id="input">输入模式</button>
+      <button id="watcher">观察者模式</button>
+      默认为观察者模式
+    </div>
     <div id="outputString"></div>
-    <textarea id="inputString" cols="30" rows="10">foobhjbjfoodFooo</textarea>
+    <textarea id="inputString">fooooobhjbjfooooodFooooo</textarea>
   </div>
 
 
@@ -76,7 +154,22 @@
     changeRegex.addEventListener('click',() => {run()})
     inputRegex.addEventListener('keyup',() => {run()})
     inputString.addEventListener('keyup',() => {run()})
-    
+
+    // 事件穿透切换,很蠢但有用
+    let input = document.querySelector('#input')
+    let watcher = document.querySelector('#watcher')
+    input.addEventListener('click',() => {inputString.style.pointerEvents = 'auto'})
+    watcher.addEventListener('click',() => {inputString.style.pointerEvents = 'none'})
+
+    // 输出框随textarea大小变化
+    let observer = new ResizeObserver((entries) => {
+      for (entry of entries){
+        outputString.style.height = entry.target.style.height
+        outputString.style.width = entry.target.style.width
+      }
+    })
+    observer.observe(inputString)
+
     getPattern()
     run()
     patternClick()
@@ -87,28 +180,49 @@
       let lastLastIndex = 0
       let html = ''
       let match
-      let re = new RegExp(inputRegex.value,patterns)
-      while(match = re.exec(inputString.value)){
-        let reset = inputString.value.slice(lastLastIndex,match.index)
-        html += `${reset}<b>${match[0]}</b>`
-        lastLastIndex = re.lastIndex
-        if(!re.global){
-          reset = inputString.value.slice(match[0].length)
-          outputString.innerHTML = `${html}${reset}`
-          return 
-        }
+      let re
+      try {
+        re = new RegExp(inputRegex.value,patterns + 'd')
+        inputRegex.style.borderColor = 'black';
+        changeRegex.disabled = false
+      } catch (e) {
+        inputRegex.style.borderColor = '#FF3333';
+        changeRegex.disabled = true
+        return
       }
-      let reset = inputString.value.slice(lastLastIndex)
-      outputString.innerHTML = `${html}${reset}`
+      re.lastIndex = 0
+      let matchIdx = 1
+      while(match = re.exec(inputString.value)){
+        let others = inputString.value.slice(lastLastIndex,match.index)
+        lastLastIndex = re.lastIndex
+        if(match[0] === ''){
+          html += `${others}<em class="zero"></em>`
+          re.lastIndex++
+        }else{
+          let matchWrap = getMatchWrap(match,matchIdx)
+          html += `${others}<b>${matchWrap}</b>`
+        }
+        if(!re.global){
+          lastLastIndex = match[0].length + match.index
+          break
+        }
+        matchIdx++
+      }
+      html += inputString.value.slice(lastLastIndex)
+      outputString.innerHTML = html
     }
+
+    // 遍历绑定复选框change事件
     function patternClick() {
       for(let item of patternIpt){
-        item.addEventListener ('click',() => {
+        item.addEventListener ('change',() => {
           getPattern()
           run()
         })
       }
     }
+
+    // 遍历获取每个复选框的内容
     function getPattern () {
       patterns = ''
       for(let item of patternIpt){
@@ -116,6 +230,18 @@
       }
     }
 
+    // 捕获分组处理
+    function getMatchWrap (match,matchIdx) {
+      let indices = match.indices.map(([start,end]) => [start - match.index,end - match.index])
+      let val = match[0].split('')
+      val.unshift('')
+      for(let i = 1;i < indices.length;i++){
+        let [start,end] = indices[i]
+        val[start] = `${val[start]}<i group-date="${i}" group-pos="Pos: ${match.indices[i].join('-')}" group-message="Group ${i}:${match[i]}" group-matchIdx="Match:${matchIdx}">`
+        val[end] = `${val[end]}</i>`
+      }
+      return val.join('')
+    }
   </script>
 </body>
 </html>
