@@ -322,7 +322,7 @@ var gxyyz = {
     })
     return initialVal
   },
-  stringifyJSON: function (str) {
+  parseJSON: function (str) {
     let i = 0
     return parseValue()
 
