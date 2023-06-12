@@ -321,5 +321,90 @@ var gxyyz = {
       initialVal = iteratee(initialVal, collection[item], item)
     })
     return initialVal
+  },
+  stringifyJSON: function (str) {
+    let i = 0
+    return parseValue()
+
+    function parseValue() {
+      if (str[i] === '{') {
+        return parseObject()
+      }
+      if (str[i] === '[') {
+        return parseArray()
+      }
+      if (!isNaN(Number(str[i]))) {
+        return parseNumber()
+      }
+      if (str[i] === '"') {
+        return parseString()
+      }
+      if (str[i] === 't') {
+        i += 4
+        return true
+      }
+      if (str[i] === 'f') {
+        i += 5
+        return false
+      }
+      if (str[i] === 'n') {
+        i += 4
+        return null
+      }
+    }
+    function parseObject() {
+      let obj = {}
+      i++ // 跳过{
+      while (true) {
+        let key = parseString()
+        i += 2 // 跳过"和:
+        let val = parseValue()
+        obj[key] = val
+        if (str[i] === ',') {
+          i++
+          continue // 如果是逗号,忽略本次循环
+        }
+        if (str[i] === '}') {
+          i++
+          break // 如果是},结束循环
+        }
+      }
+      return obj
+    }
+    function parseArray() {
+      let arr = []
+      i++ //
+      while (true) {
+        let item = parseValue()
+        arr.push(item)
+        if (str[i] === ',') {
+          i++
+          continue // 如果是逗号,忽略本次循环
+        }
+        if (str[i] === ']') {
+          i++
+          break // 如果是},结束循环
+        }
+      }
+      return arr
+    }
+    function parseString() {
+      i++ //跳过"
+      let start = i
+      while (true) {
+        // 需要报错
+        if (str[i] === '"') break
+        i++
+      }
+      return str.slice(start, i)
+    }
+    function parseNumber() {
+      let start = i
+      while (true) {
+        i++
+        if (isNaN(Number(str[i])) && str[i] !== '.') break
+      }
+      return Number(str.slice(start, i))
+    }
   }
 }
