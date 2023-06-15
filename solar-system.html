@@ -6,11 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body style="background-color: black;">
+<body style="background-color: black;margin: 0;">
   <script>
     const canvas = document.createElement('canvas')
-    canvas.width = 800
-    canvas.height = 800
+    function canvasResize () {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    canvasResize()
+    window.onresize = canvasResize
     canvas.style.display = 'block'
     canvas.style.margin = '0 auto'
     document.body.append(canvas)
@@ -33,18 +37,34 @@
       context.closePath()
     }
 
-    let locationXArr = []
-    let locationYArr = []
-    let sizeArr = []
-    let fillStyleArr = []
-    let reserveArr = Array(100).fill(true)
-    for(let i = 0 ;i< 100;i++){
-      locationXArr.push(Math.ceil(Math.random() * 800))
-      locationYArr.push(Math.ceil(Math.random() * 800))
-      sizeArr.push(Math.ceil(Math.random() * 3))
-      fillStyleArr.push(Number(Math.random().toFixed(1)))
+    function drawEarth () {
+
     }
 
+
+    // 星星参数
+    let locationXArr
+    let locationYArr
+    let sizeArr
+    let fillStyleArr
+    let reserveArr
+    function starResize () {
+      locationXArr = []
+      locationYArr = []
+      sizeArr = []
+      fillStyleArr = []
+      reserveArr = []
+      for(let i = 0 ;i< 100;i++){
+        locationXArr.push(Math.ceil(Math.random() * canvas.width))
+        locationYArr.push(Math.ceil(Math.random() * canvas.height))
+        sizeArr.push(Math.ceil(Math.random() * 3))
+        fillStyleArr.push(Number(Math.random().toFixed(1)))
+        reserveArr.push((Math.random() > 0.5))
+      }
+    }
+    starResize()
+    // window.onresize = starResize 
+    //星星闪烁
     setInterval(() => {
       for (let i = 0; i < 100; i++) {
         if(reserveArr[i]){
@@ -70,21 +90,21 @@
       lastTime = time
 
       context.clearRect(0,0,canvas.width,canvas.height)
-
+      
+      context.save()
+      
       context.beginPath()
       context.fillStyle = 'rgb(0,47,147)'
-      context.fillRect(0,0,800,800)
+      context.fillRect(0,0,canvas.width,canvas.height)
       context.closePath()
-
-      context.save()
-
+      // 星星
       for(let i = 0 ;i< 100;i++){
         drawStar(locationXArr[i],locationYArr[i],sizeArr[i],fillStyleArr[i])
       }
       
       // 太阳
       context.beginPath()
-      context.arc(400, 400, 150, 0, 2 * Math.PI)
+      context.arc(canvas.width / 2, canvas.height / 2, 100, 0, 2 * Math.PI)
       context.fillStyle = 'orange'
       context.shadowColor = 'orange'
       context.shadowBlur = 100
@@ -93,10 +113,10 @@
 
       // 地球
       context.beginPath()
-      context.translate(400,400)
+      context.translate(canvas.width / 2, canvas.height / 2)
       // context.rotate(earthContent += .2 * Math.PI / 180)
       context.rotate(angle)
-      context.arc(-200,-200,20,0,2 * Math.PI)
+      context.arc(-200,-200,15,0,2 * Math.PI)
       context.fillStyle = 'skyblue'
       context.fill()
       context.closePath()
@@ -108,7 +128,7 @@
       context.translate(-200,-200)
       // context.rotate(moonContent +=1 * Math.PI / 180)
       context.rotate(angle * 2.4)
-      context.arc(-23,-23,5,0,2 * Math.PI)
+      context.arc(-23,-23,3,0,2 * Math.PI)
       context.shadowColor = '#ddd'
       context.shadowBlur = 3
       context.fillStyle = '#ddd'
