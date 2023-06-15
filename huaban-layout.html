@@ -420,12 +420,12 @@
         let moveY = windowHeight / 2  - (box.top + imgHeight / 2)
         let magnification = Math.min(windowHeight / imgHeight,windowWidth / imgWidth)
 
-        mark.style.width = `${windowWidth}px`
-        mark.style.height = `${windowHeight}px`
-        mark.style.visibility = 'visible'
         mark.style.zIndex = zIndex++
         element.style.transform = `translate(${moveX}px,${moveY}px) scale(${magnification})`
         element.style.zIndex = zIndex++
+        mark.style.width = `${windowWidth}px`
+        mark.style.height = `${windowHeight}px`
+        mark.style.visibility = 'visible'
       }
     })
     mark.addEventListener('click',(e) => {
