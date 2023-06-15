@@ -14,7 +14,7 @@
       canvas.height = window.innerHeight
     }
     canvasResize()
-    window.onresize = canvasResize
+    // window.onresize = canvasResize
     canvas.style.display = 'block'
     canvas.style.margin = '0 auto'
     document.body.append(canvas)
@@ -63,6 +63,10 @@
       }
     }
     starResize()
+    window.addEventListener('resize',() => {
+      canvasResize()
+      starResize()
+    })
     // window.onresize = starResize 
     //星星闪烁
     setInterval(() => {
