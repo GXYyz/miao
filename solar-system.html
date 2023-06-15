@@ -65,7 +65,10 @@
 
 
 
-    function draw() {
+    function draw(time) {
+      if(lastTime != null) angle += (time - lastTime) * 0.0005
+      lastTime = time
+
       context.clearRect(0,0,canvas.width,canvas.height)
 
       context.beginPath()
@@ -91,7 +94,8 @@
       // 地球
       context.beginPath()
       context.translate(400,400)
-      context.rotate(earthContent += .2 * Math.PI / 180)
+      // context.rotate(earthContent += .2 * Math.PI / 180)
+      context.rotate(angle)
       context.arc(-200,-200,20,0,2 * Math.PI)
       context.fillStyle = 'skyblue'
       context.fill()
@@ -102,7 +106,8 @@
       // 月亮
       context.beginPath()
       context.translate(-200,-200)
-      context.rotate(moonContent +=1 * Math.PI / 180)
+      // context.rotate(moonContent +=1 * Math.PI / 180)
+      context.rotate(angle * 2.4)
       context.arc(-23,-23,5,0,2 * Math.PI)
       context.shadowColor = '#ddd'
       context.shadowBlur = 3
@@ -114,8 +119,10 @@
       requestAnimationFrame(draw)
     }
     
-    let earthContent = 1
-    let moonContent = 0
+    // let earthContent = 1
+    // let moonContent = 0
+    let lastTime = null
+    let angle = 0
     requestAnimationFrame(draw)
 
 
