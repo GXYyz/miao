@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body>
+<body style="background-color: black;">
   <script>
     const canvas = document.createElement('canvas')
     canvas.width = 800
@@ -20,13 +20,13 @@
     function drawStar(x, y, r,fillStyle) {
       const angle = Math.PI / 5;
       context.beginPath()
-      // 移动到五角星顶点
+      // 移动到五边型顶点
       context.moveTo(x + r * Math.sin(-angle), y + r * Math.cos(-angle))
       for (let i = 1; i <= 5; i++) {
         // 计算其他四个点位置
         context.lineTo(x + r * Math.sin(-angle + i * 2 * angle), y + r * Math.cos(-angle + i * 2 * angle));
       }
-      context.fillStyle = 'white'
+      context.fillStyle = `rgba(255,255,255,${fillStyle})`
       context.fill()
       context.shadowColor = '#fff'
       context.shadowBlur = 3 * r
@@ -37,17 +37,32 @@
     let locationYArr = []
     let sizeArr = []
     let fillStyleArr = []
+    let reserveArr = Array(100).fill(true)
     for(let i = 0 ;i< 100;i++){
       locationXArr.push(Math.ceil(Math.random() * 800))
       locationYArr.push(Math.ceil(Math.random() * 800))
       sizeArr.push(Math.ceil(Math.random() * 3))
+      fillStyleArr.push(Number(Math.random().toFixed(1)))
     }
-    // setInterval(() => {
-    //   for (let i = 0; i < 100; i++) {
-    //     fillStyleArr = []
-    //     fillStyleArr.push((Math.random() > 0.5 ? 'white' : 'transparent'))
-    //   }
-    // },500)
+
+    setInterval(() => {
+      for (let i = 0; i < 100; i++) {
+        if(reserveArr[i]){
+        fillStyleArr[i] += 0.1
+          if(fillStyleArr[i] > 1){
+            fillStyleArr[i] = 1
+            reserveArr[i] = false
+          }
+        }else{
+          fillStyleArr[i] -= 0.1
+          if(fillStyleArr[i] < 0){
+            fillStyleArr[i] = 0
+            reserveArr[i] = true
+          }
+        }
+      }
+    },200)
+
 
 
     function draw() {
@@ -58,11 +73,11 @@
       context.fillRect(0,0,800,800)
       context.closePath()
 
-      for(let i = 0 ;i< 100;i++){
-        drawStar(locationXArr[i],locationYArr[i],sizeArr[i])
-      }
-
       context.save()
+
+      for(let i = 0 ;i< 100;i++){
+        drawStar(locationXArr[i],locationYArr[i],sizeArr[i],fillStyleArr[i])
+      }
       
       // 太阳
       context.beginPath()
