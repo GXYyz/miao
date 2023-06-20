@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 100px;
+      height: 100px;
+      position: fixed;
+      z-index: 1;
+    }
+    #green{
+      background-color: green;
+      top: 100px;
+      left: 100px;
+    }
+    #blue{
+      background-color: blue;
+      top: 150px;
+      left: 150px;
+    }
+    #red{
+      background-color: red;
+      top: 200px;
+      left: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="green"></div>
+  <div id="blue"></div>
+  <div id="red"></div>
+
+  <script>
+    let Index = 5
+    let element
+    function divMOve () {
+      element.style.zIndex = Index++
+      let box = element.getBoundingClientRect()
+      let top = box.top + event.movementY + 'px'
+      let left = box.left + event.movementX + 'px'
+      element.style.top = top
+      element.style.left = left
+    }
+
+    window.addEventListener('mousedown',(e) => {
+      element = e.target
+      window.addEventListener('mousemove',divMOve)
+    })
+    window.addEventListener('mouseup',(e) => {
+      let box = element.getBoundingClientRect()
+      if(box.top < 20){
+        element.style.top = 0
+      }
+      if(box.left < 20){
+        element.style.left = 0
+      }
+      window.removeEventListener('mousemove',divMOve)
+    })
+
+  </script>
+</body>
+</html>
