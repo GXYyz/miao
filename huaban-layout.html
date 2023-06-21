@@ -11,20 +11,14 @@
       box-sizing: border-box;
     }
     body{
-      background-color: #f0f0f0;
+      background-color: black;
       overflow-y: scroll;
-      padding: 20px;
     }
     .app{
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
       margin: 0 auto;
-      
+      position: relative;
     }
-    .app div{
-      flex: 1;
-    }
+  
     #mark{
       position: fixed;
       visibility: hidden;
@@ -32,16 +26,17 @@
       margin: -20px 0 0 -20px;
     }
     img{
-      margin-bottom: 20px;
-      display: block;
       transition: 0.3s;
-      position: relative;
+      position: absolute;
+      outline: 1px solid white;
+      outline-offset: 1px;
     }
   </style>
 </head>
 <body>
   <div id="mark"></div>
   <div class="app"></div>
+  <script src="https://unpkg.com/lodash"></script>
   <script>
     const imgs = [
       {
@@ -370,40 +365,118 @@
       }
     ]
     let app = document.querySelector('.app')
+    // 滚动加载阈值
+    let threshold = 100
+    let prevColumn = 0
     function loadImg () {
+      let displayWidth = 200
+      let gap = 20
+      let columnCount = Math.floor((window.innerWidth - 120) / displayWidth)
+      
+      if(columnCount == prevColumn) return
+      prevColumn = columnCount
+      
+      let containerWidth = columnCount * displayWidth + (columnCount - 1) * gap
+      app.style.width = containerWidth + 'px'
+      
+      let columnHeight = Array(columnCount).fill(0)
       app.innerHTML = ''
-      let columnCount = Math.floor(window.innerWidth / 200)
-      for(let i = 0;i < columnCount;i++){
-        app.append(document.createElement('div'))
-      }
-      let divs = [...document.querySelectorAll('.app div')]
-      let divWidth = divs[0].offsetWidth
-      let divHeightArr = Array(columnCount).fill(0)
-      let imgArr = Array(columnCount).fill(0).map(it => [])
-
+      
+      // 计算元素位置
       for (let item of imgs){
+        let minColHeight = Math.min(...columnHeight)
+        let colIdx = columnHeight.indexOf(minColHeight)
+        let displayHeight = displayWidth * item.height / item.width
+        let left = colIdx * (displayWidth + gap)
+        let top = columnHeight[colIdx] + gap
+        item.show = false
+        item.left = left
+        item.top = top
+        item.displayHeight = displayHeight
+        item.displayWidth = displayWidth
+        columnHeight[colIdx] += displayHeight + gap
+      }
+      app.style.height = Math.max(...columnHeight) + 'px'
+
+      // 首屏展示内容加载
+      imgs.filter(img => {
+        return img.top + img.displayHeight > window.pageYOffset - 20 - threshold && img.top < window.pageYOffset + window.innerHeight + threshold
+      }).forEach(item => {
+        item.show = true
         let img = document.createElement('img')
         img.src = item.fullUrl
-        img.height = item.height / item.width * divWidth
-        let minDivHeight = Math.min(...divHeightArr)
-        let divIdx = divHeightArr.indexOf(minDivHeight)
-
-        divHeightArr[divIdx] += img.height
-        imgArr[divIdx].push(img)
-      }
-      imgArr.forEach((item,idx) => {
-        divs[idx].append(...item)
+        img.style.width = item.displayWidth + 'px'
+        img.style.height = item.displayHeight + 'px'
+        img.style.transform = `translate(${item.left}px,${item.top}px)`
+        app.append(img)
       })
+      
     }
 
+    let prevScrollY = 0
+
+    // 滚动加载
+    function scrollLoad () {
+      // 当滚动距离过短时不加载
+      if(Math.abs(window.scrollY - prevScrollY) < 80) return 
+
+      // //移除离开视口的元素
+      // let elements = document.querySelectorAll('img')
+      // elements.forEach( img => {
+      //   let box = img.getBoundingClientRect()
+      //   if(prevScrollY < window.scrollY) {
+      //     if(box.bottom < -threshold){
+      //       app.removeChild(img)
+      //     }
+      //   }
+      //   if(prevScrollY > window.scrollY){
+      //     if(box.top > window.innerHeight + threshold){
+      //       app.removeChild(img)
+      //     }
+      //   }
+      // })
+
+      let shownImgs = imgs.filter(img => img.show)
+      let toBeShow = imgs.filter(img => {
+        return img.top + img.displayHeight > window.pageYOffset - 20 - threshold && img.top < window.pageYOffset + window.innerHeight + threshold
+      })
+      
+      // 将移除的元素标记
+      let removeElement = _.difference(shownImgs,toBeShow)
+      removeElement.forEach(img => {
+        img.show = false
+        // 通过属性选择器获取需要删除元素的dom
+        let remove = document.querySelector(`[src="${img.fullUrl}"]`)
+        remove.remove()
+      })
+
+      // 为需要的元素创建dom
+      let toShowNew = _.difference(toBeShow,shownImgs)
+      toShowNew.forEach(item => {
+        item.show = true
+        let img = document.createElement('img')
+        img.src = item.fullUrl
+        img.style.width = item.displayWidth + 'px'
+        img.style.height = item.displayHeight + 'px'
+        img.style.transform = `translate(${item.left}px,${item.top}px)`
+        app.append(img)
+      })
+      prevScrollY = window.scrollY
+    }
+    
     loadImg()
+    
     window.onresize = loadImg
+
+    window.onscroll = scrollLoad
+
+
+    // 点击放大图片
     let zIndex = 1
     let prevElement
     let mark = document.querySelector('#mark')
     app.addEventListener('click',(e) => {
       if(e.target.matches('img')){
-        debugger;
         let element = e.target
         if(element.style.transform !== '') {
           element.style.transform = ''
@@ -434,5 +507,7 @@
     })
 
   </script>
+
+
 </body>
 </html>
