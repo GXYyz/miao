@@ -322,6 +322,144 @@ var gxyyz = {
     })
     return initialVal
   },
+  sortedIndex: (array, value) => {
+    let start = 0
+    let end = array.length
+    let index
+    let sub
+    while (true) {
+      // 区间没有变化时停止循环
+      if (end - start == sub) break
+      sub = end - start
+      index = (sub >> 1) + start
+      if (array[index] < value) {
+        start = index
+      } else {
+        end = index
+      }
+    }
+
+    if (array[index] < value) {
+      return index + 1
+    } else {
+      return index
+    }
+  },
+  sortedIndexBy: function (array, value, iteratee = (it) => it) {
+    iteratee = this.baseIteratee(iteratee, 'beKey')
+    let start = 0
+    let end = array.length
+    let index
+    let sub
+    while (true) {
+      if (end - start == sub) break
+      sub = end - start
+      index = (sub >> 1) + start
+      if (iteratee(array[index]) < iteratee(value)) {
+        start = index
+      } else {
+        end = index
+      }
+    }
+
+    if (iteratee(array[index]) < iteratee(value)) {
+      return index + 1
+    } else {
+      return index
+    }
+  },
+  sortedIndexOf: function (array, value) {
+    let index = this.sortedIndex(array, value)
+    if (array[index] == value) return index
+    return -1
+  },
+  sortedLastIndex: (array, value) => {
+    let start = 0
+    let end = array.length
+    let index
+    let sub
+    while (true) {
+      if (end - start == sub) break
+      sub = end - start
+      index = (sub >> 1) + start
+      if (array[index] > value) {
+        end = index
+      } else {
+        start = index
+      }
+    }
+
+    if (array[index] > value) {
+      return index
+    } else {
+      return index + 1
+    }
+  },
+  sortedLastIndexBy: function (array, value, iteratee = (it) => it) {
+    iteratee = this.baseIteratee(iteratee, 'beKey')
+    let start = 0
+    let end = array.length
+    let index
+    let sub
+    while (true) {
+      if (end - start == sub) break
+      sub = end - start
+      index = (sub >> 1) + start
+      if (iteratee(array[index]) > iteratee(value)) {
+        end = index
+      } else {
+        start = index
+      }
+    }
+
+    if (iteratee(array[index]) > iteratee(value)) {
+      return index
+    } else {
+      return index + 1
+    }
+  },
+  sortedLastIndexOf: function (array, value) {
+    let index = this.sortedLastIndex(array, value) - 1
+    if (array[index] == value) return index
+    return -1
+  },
+  sortedUniq: (array) => {
+    return Array.from(new Set(array))
+  },
+  sortedUniqBy: function (array, iteratee = (it) => it) {
+    iteratee = this.baseIteratee(iteratee)
+    let result = []
+    let set = new Set()
+    for (let item of array) {
+      let val = iteratee(item)
+      if (!set.has(val)) {
+        set.add(val)
+        result.push(item)
+      }
+    }
+    return result
+  },
+  tail: (array) => {
+    return array.slice(1)
+  },
+  take: (array, n = 1) => {
+    return array.slice(0, n)
+  },
+  takeRight: (array, n = 1) => {
+    return array.slice(array.length - n < 0 ? 0 : array.length - n)
+  },
+  takeRightWhile: function (array, predicate = (it) => it) {
+    return array.slice(array.findLastIndex((item) => !this.baseIteratee(predicate)(item)) + 1)
+  },
+  takeWhile: function (array, predicate = (it) => it) {
+    return array.slice(
+      0,
+      array.findIndex((item) => !this.baseIteratee(predicate)(item))
+    )
+  },
+  union: function (...args) {
+    return Array.from(new Set(this.flattenDeep(args).toSorted((a, b) => b - a)))
+  },
   parseJSON: function (str) {
     let i = 0
     return parseValue()

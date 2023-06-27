@@ -121,7 +121,7 @@
   <div class="regex">
     请输入正则表达式:<br/>
     <input type="text" value="(f(o))(o(o)(o))" id="inputRegex">
-    <button id="changeRegex">匹配</button>
+    <button id="changeRegex">匹配</button> <span id="restate"></span>
     <div>
       <label><input type="checkbox" name="pattern" value="g" id="global" checked>g</label>
       <label><input type="checkbox" name="pattern" value="i" id="ignoreCase">i</label>
@@ -150,6 +150,7 @@
     let inputString = document.querySelector('#inputString')
     let changeRegex = document.querySelector('#changeRegex')
     let patternIpt = document.getElementsByName('pattern')
+    let restate = document.querySelector('#restate')
     let patterns = ''
     changeRegex.addEventListener('click',() => {run()})
     inputRegex.addEventListener('keyup',() => {run()})
@@ -192,24 +193,48 @@
       }
       re.lastIndex = 0
       let matchIdx = 1
-      while(match = re.exec(inputString.value)){
-        let others = inputString.value.slice(lastLastIndex,match.index)
-        lastLastIndex = re.lastIndex
-        if(match[0] === ''){
-          html += `${others}<em class="zero"></em>`
-          re.lastIndex++
+      let startTime = Date.now()
+      restate.textContent = '匹配中...'
+      getAllMatch(re,inputString.value,(err,matches) => {
+        if(err){
+          restate.textContent = '匹配超时'
         }else{
-          let matchWrap = getMatchWrap(match,matchIdx)
-          html += `${others}<b>${matchWrap}</b>`
+          debugger
+          for (match of matches){
+            let others = inputString.value.slice(lastLastIndex,match.index)
+            lastLastIndex = match.index + match[0].length
+            if(match[0] === ''){
+              html += `${others}<em class="zero"></em>`
+              re.lastIndex++
+            }else{
+              let matchWrap = getMatchWrap(match,matchIdx)
+              html += `${others}<b>${matchWrap}</b>`
+            }
+            matchIdx++
+          }
+          html += inputString.value.slice(lastLastIndex)
+          outputString.innerHTML = html
+          restate.textContent = `匹配完成(${Date.now() - startTime}ms)`
         }
-        if(!re.global){
-          lastLastIndex = match[0].length + match.index
-          break
-        }
-        matchIdx++
-      }
-      html += inputString.value.slice(lastLastIndex)
-      outputString.innerHTML = html
+      })
+      // while(match = re.exec(inputString.value)){
+      //   let others = inputString.value.slice(lastLastIndex,match.index)
+      //   lastLastIndex = re.lastIndex
+      //   if(match[0] === ''){
+      //     html += `${others}<em class="zero"></em>`
+      //     re.lastIndex++
+      //   }else{
+      //     let matchWrap = getMatchWrap(match,matchIdx)
+      //     html += `${others}<b>${matchWrap}</b>`
+      //   }
+      //   if(!re.global){
+      //     lastLastIndex = match[0].length + match.index
+      //     break
+      //   }
+      //   matchIdx++
+      // }
+      // html += inputString.value.slice(lastLastIndex)
+      // outputString.innerHTML = html
     }
 
     // 遍历绑定复选框change事件
@@ -241,6 +266,51 @@
         val[end] = `${val[end]}</i>`
       }
       return val.join('')
+    }
+
+
+    // 使用work在支线计算exec
+    function getAllMatch (re,string,callback) {
+      let blob = new Blob([`
+      addEventListener('message', e => {
+          let {re, string} = e.data
+          let matches = []
+          let match = null
+
+          while(match = re.exec(string)) {
+            matches.push(match)
+            if (re.global == false) {
+              break
+            }
+            if (match[0] == '') {
+              re.lastIndex++
+            }
+          }
+
+          postMessage(matches)
+        })
+      `],{type: 'application/javascript'})
+
+      let workerURL =  URL.createObjectURL(blob)
+
+      let worker = new Worker(workerURL)
+      let ret = false
+
+      worker.addEventListener('message',(e) => {
+        ret = true
+        let matches = e.data
+        worker.terminate()
+        callback(null,matches)
+      })
+
+      worker.postMessage({re,string})
+
+      setTimeout(() => {
+        if(!ret){
+          worker.terminate()
+          callback(new Error('xxxx'),null)
+        }
+      }, 2000);
     }
   </script>
 </body>
