@@ -105,7 +105,7 @@ var gxyyz = {
   differenceWith: function (arr, ...args) {
     let comparator = args.pop()
     args = args.flat()
-    return arr.filter((item) => args.reduce((state, arg) => state || comparator(item, arg)), false)
+    return arr.filter((item) => !args.reduce((state, arg) => state || comparator(item, arg)), false)
   },
   fill: (arr, val, start = 0, end = arr.length) => {
     for (let i = start; i < end; i++) {
@@ -458,7 +458,75 @@ var gxyyz = {
     )
   },
   union: function (...args) {
-    return Array.from(new Set(this.flattenDeep(args).toSorted((a, b) => b - a)))
+    return Array.from(new Set(this.flattenDeep(args)))
+  },
+  unionBy: function (...args) {
+    let iteratee = this.baseIteratee(args.pop(), 'beKey')
+    let set = new Set()
+    let result = []
+    args = this.flattenDeep(args)
+    for (let item of args) {
+      let p = iteratee(item)
+      if (!set.has(p)) {
+        set.add(p)
+        result.push(item)
+      }
+    }
+    return result
+  },
+  unionWith: function (...args) {
+    let comparator = args.pop()
+    let result = args[0]
+    for (let i = 1; i < args.length; i++) {
+      let arr = args[i]
+      result.push(...arr.filter((item) => !result.reduce((state, arg) => state || comparator(item, arg), false)))
+    }
+    return result
+  },
+  uniq: (arr) => Array.from(new Set(arr)),
+  uniqBy: function (arr, iteratee = (it) => it) {
+    let iterator = this.baseIteratee(iteratee)
+    let result = []
+    let set = new Set()
+    for (let item of arr) {
+      let arg = iterator(item, 'beKey')
+      if (!set.has(arg)) {
+        set.add(arg)
+        result.push(item)
+      }
+    }
+    return result
+  },
+  uniqWith: function (arr, comparator) {
+    let result = arr.slice(0, 1)
+    for (let i = 1; i < arr.length; i++) {
+      if (!result.reduce((state, arg) => state || comparator(arr[i], arg), false)) {
+        result.push(arr[i])
+      }
+    }
+    return result
+  },
+  unzip: (arr) => {
+    let result = Array(arr[0].length)
+      .fill([])
+      .map((item) => item.slice())
+    for (let i = 0; i < result.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        result[i].push(arr[j][i])
+      }
+    }
+    return result
+  },
+  unzipWith: (arr, iteratee) => {
+    let result = []
+    for (let i = 0; i < arr[0].length; i++) {
+      let item = []
+      for (let j = 0; j < arr.length; j++) {
+        item.push(arr[j][i])
+      }
+      result.push(iteratee(...item))
+    }
+    return result
   },
   parseJSON: function (str) {
     let i = 0
