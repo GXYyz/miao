@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meshow = $event.target.valueta name="visible-todos" value="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="app">
+    <h1>Todos</h1>
+    <div>
+      <input type="checkbox" @change="allDone()" :checked="todos.length && todos.every(it => it.done)">
+      <input type="text" @keyup.enter="addItem($event)">
+    </div>
+    <ul>
+      <li v-for="(todo,idx) of needShow()" :key="idx">
+        <input type="checkbox" :checked="todo.done" @change="todo.done = !todo.done">
+        <input type="text" hidden>
+        <span>{{ todo.todo }}</span>
+        <button @click="haveDone(idx)">✘</button>
+      </li>
+    </ul>
+    <span>{{ todos.filter(it => !it.done).length }}件事情未完成</span><br>
+    <div>
+      <label>
+        <input type="radio" @click="show = $event.target.value" name="visible-todos" value="all" checked>all
+      </label>
+      <label>
+        <input type="radio" @click="show = $event.target.value" name="visible-todos" value="done">done
+      </label>
+      <label>
+        <input type="radio" @click="show = $event.target.value" name="visible-todos" value="active">active
+      </label>
+    </div>
+    <button @click="clearDone()">clear done</button>
+  </div>
+
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script>
+    new Vue({
+      el: '.app',
+      data: {
+        todos:JSON.parse(localStorage.getItem('todos')) ?? [
+          {todo: '吃饭',done: false},
+          {todo: '睡觉',done: false},
+          {todo: '打豆豆',done: false}
+        ],
+        all: false,
+        show: 'all'
+      },
+      methods:{
+        needShow() {
+          if(this.show == 'all'){
+            return this.todos
+          }else if(this.show == 'done'){
+            return this.todos.filter(it => it.done)
+          }else{
+            return this.todos.filter(it => !it.done)
+          }
+        },
+        haveDone(idx) {
+          this.todos.splice(idx,1)
+        },
+        allDone(){
+          this.all = !this.all
+          this.todos.map(it => {it.done = this.all})
+        },
+        addItem(e){
+          if(e.target.value){
+            this.todos.push({
+              todo: e.target.value,
+              done: false
+            })
+            e.target.value = ''
+          }
+        },
+        clearDone() {
+          this.todos = this.todos.filter(it => !it.done)
+        }
+      },
+      watch: {
+        todos:{
+          deep: true,
+          handler: function () {
+            localStorage.setItem('todos',JSON.stringify(this.todos))
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
